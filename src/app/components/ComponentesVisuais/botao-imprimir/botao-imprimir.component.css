@@ -1,0 +1,30 @@
+.fixed-button{
+    border: 2px solid black;
+    background-color: rgba(217, 217, 217); /* Cor de fundo com 70% de opacidade */
+    color: #000000;
+    box-shadow: 5px 10px 10px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    
+}
+
+
+
+  @media (max-width: 1200px) {
+
+
+    .fixed-button {
+      display: flex;
+      flex-direction: column; /* Muda a direção do flex para coluna */
+      align-items: center; /* Centraliza o conteúdo na coluna */
+      bottom: unset; /* Remove a distância da parte inferior */
+      right: 0;
+      width: 100%;
+    }
+  }
+
+  @media print{
+    .fixed-button{
+      display: none;
+    }
+  }

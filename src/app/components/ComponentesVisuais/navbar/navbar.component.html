@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-body-secondary" style="height: 70px;" id="navbarGeral">
+    <div class="container-fluid col-md-9 ml-sm-auto col-lg-10 px-md-4" style="max-width: 100%;">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <a routerLink="/home" id="logoFatecCapi" class="navbar-brand" style="max-height: 60px;">
+                <img src="../../../../assets/logoFatecCapi.png" style="max-height: 60px;" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div  class="collapse navbar-collapse " style="z-index: 1000;" id="navbarSupportedContent">
+            <ul id="menu"  class="navbar-nav col-4 ms-auto mb-2 mb-lg-0 bg-body-secondary p-2" style="width: fit-content;">
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/home">Início</a>
+                </li>
+
+                <li class="nav-item dropdown"  style="z-index: 500;">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Relatório
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end bg-body-secondary">
+                        <li><a class="dropdown-item" routerLink="/tela-relatorio-professor">Professor</a></li>
+                        <li><a class="dropdown-item" routerLink="/tela-relatorio-curso" href="#">Curso</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown"  style="z-index: 500;">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Cadastrar
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end bg-body-secondary">
+                        <li><a class="dropdown-item" routerLink="/tela-cadastro-professor">Professor</a></li>
+                        <li><a class="dropdown-item" routerLink="/tela-cadastro-curso" href="#">Curso</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

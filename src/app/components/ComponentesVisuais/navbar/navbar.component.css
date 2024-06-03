@@ -1,0 +1,11 @@
+#navbarGeral {
+    box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
+    width: 100vw;
+}
+
+@media print {
+    #navbarGeral {
+        display: none;
+
+    }
+}

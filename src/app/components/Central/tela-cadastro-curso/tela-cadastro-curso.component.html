@@ -1,0 +1,56 @@
+<main class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="form-container">
+        <h4 class="text-center mb-2">
+          Cadastro de Curso<br />Fatec Votorantim
+        </h4>
+        <form class="row g-2"
+          (submit)="cursoService.cadastrar(nome.value, codigo.value, [disciplinas.value] , sigla.value, modalidade.value, professores.values, coordenador.value)">
+          <div class="col-md-4">
+            <label for="inputNomeCurso" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="inputNomeCurso" name="inputNomeCurso" #nome required />
+          </div>
+          <div class="col-md-4">
+            <label for="inputCodigoCurso" class="form-label">Código</label>
+            <input type="text" class="form-control" id="inputCodigoCurso" name="inputCodigoCurso" #codigo required />
+          </div>
+          <div class="col-md-4">
+            <label for="inputSiglaCurso" class="form-label">Sigla</label>
+            <input type="text" class="form-control" id="inputSiglaCurso" #sigla name="inputSigla" />
+          </div>
+          <div class="col-md-4">
+            <label for="inputModalidade">Modalidade</label>
+            <select name="inputModalidade" id="inputModalidadeCurso" class="form-select" #modalidade>
+              <option selected disabled>Selecione...</option>
+              <option value="Presencial">Presencial</option>
+              <option value="Híbrido">Híbrido</option>
+              <option value="EAD">EaD</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="inputProfessores" class="form-label">Professores</label>
+            <select id="" class="form-select" multiple>
+              <option selected disabled>Selecione</option>
+              <option class="form-check" *ngFor="let professor of professores" value="{{professor.id}}">{{professor.nome}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="inputCoordenador" class="form-label">Coordenador</label>
+            <input type="text" class="form-control" name="inputCoordenadorCurso" id="inputCoordenadorCurso" #coordenador>
+          </div>
+          <div class="col-md-12">
+            <label for="inputDisciplinas" class="form-label">Disciplinas</label>
+            <textarea type="text" class="form-control" id="inputDisciplinasCurso" #disciplinas
+              name="inputDisciplinas"></textarea>
+          </div>
+          <div class="col-12 text-center mt-2">
+            <button type="submit" class="btn btn-secondary" style="width: 15%">
+              Cadastrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

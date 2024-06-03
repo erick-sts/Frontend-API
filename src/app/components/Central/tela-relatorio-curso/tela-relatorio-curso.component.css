@@ -1,0 +1,17 @@
+#topicos{
+    justify-content: center;
+}
+
+body{
+    background-color: #EDEDED;
+}
+
+@media print{
+    #filtro, .colunaOpcoes{
+        display: none;
+    }
+
+    #conteinerTabela{
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ acao }}</h5>
+</div>
+<div class="modal-body" [innerHTML]="mensagem"></div>
+<div class="modal-footer" *ngIf="mostrarBotoes">
+  <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel')">Cancelar</button>
+  <button type="button" class="btn btn-danger" (click)="confirm()">Confirmar</button>
+</div>
+<div class="modal-footer" *ngIf="!mostrarBotoes">
+  <button type="button" class="btn btn-primary" (click)="modal.close('ok')">OK</button>
+</div>

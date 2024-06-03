@@ -1,0 +1,38 @@
+<main class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h2 class="text-center mb-4" style="font-weight: bold">
+        {{professor.nome}}
+      </h2>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>E-mail</th>
+              <th>Titulação</th>
+              <th>Número da Matrícula</th>
+              <th>Curriculum Lattes</th>
+              <th>Código da UE - SEDE</th>
+              <th>Referência</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td>{{ professor.email }}</td>
+              <td>{{ professor.titulacao }}</td>
+              <td>{{ professor.matriculaId }}</td>
+              <td>{{ professor.lattes }}</td>
+              <td>{{ professor.unidadeId }}</td>
+              <td>{{ professor.referencia }}</td>
+
+
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

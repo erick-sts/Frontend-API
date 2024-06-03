@@ -1,0 +1,99 @@
+<div class="container p-1 my-2">
+
+    <!--Filtro-->
+    <div class="card mb-2 p-3" id="filtro">
+        <h5 class="mb-1">Filtrar Cursos</h5>
+        <main>
+            <div id="conteiner" class="p-1">
+                <div id="topicos" class="row align-items-end mb-2">
+                    <div id="nome" class="topico col-md-2">
+                        <h6>Nome do Curso</h6>
+                        <input type="text" class="form-control" placeholder="Digite um nome" #nome>
+                    </div>
+
+                    <div id="coordenador" class="topico col-md-2">
+                        <h6>Nome do Coordenador</h6>
+                        <input type="text" class="form-control" placeholder="Digite um nome" #coordenador>
+                    </div>
+
+                    <div id="titulacoes" class="topico col-md-4">
+
+                        <h6>Modalidades</h6>
+
+                        <div class="empilhados">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Presencial" id="modalidade1" (change)="onCheckboxChange($event, this.selectedModalidades)">
+                                <label class="form-check-label" for="modalidade1">
+                                    Presencial
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Hibrido" id="modalidade2" (change)="onCheckboxChange($event, this.selectedModalidades)">
+                                <label class="form-check-label" for="modalidade2">
+                                    Híbrido
+                                </label>
+                            </div>
+
+                            <div class="form-check">    
+                                <input class="form-check-input" type="checkbox" value="EAD" id="modalidade3" (change)="onCheckboxChange($event, this.selectedModalidades)">
+                                <label class="form-check-label" for="modalidade3">
+                                    EaD
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div id="botoes" class="col-md-3 mb-2 d-flex justify-content-end">
+                        <a class="btn btn-secondary me-2" (click)="limpaFiltro()">Limpar Filtros</a>
+                        <button class="btn btn-primary me-2" (click)="filtraCurso(nome.value, coordenador.value, this.selectedModalidades)">Filtrar</button>
+                        <app-botao-imprimir></app-botao-imprimir>
+                    
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+
+    <!--Tabela-->
+    <div class="card-body mt-3"  id="conteinerTabela">
+        <table id="tabela" class="table table-striped table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Sigla</th>
+                    <th scope="col">Código</th>
+                    <th scope="col">Coordenador</th>
+                    <th scope="col">Modalidade</th>
+                    <th scope="col" class="colunaOpcoes">Opções</th>
+                </tr>
+            </thead>
+            <tbody id="dadosTabela">
+                <tr *ngFor="let curso of cursos">
+                    <th scope="row">{{curso.nome}}</th>
+                    <td>{{curso.sigla}}</td>
+                    <td>{{curso.codCourse}}</td>
+                    <td>{{curso.coordenador}}</td>
+                    <td>{{curso.modalidade}}</td>
+                    <td class="colunaOpcoes">
+                        <br />
+                        <!-- <a class="colunaOpcoes" [routerLink]="['/tela-editar-professor', curso.nome]"
+                            class="colunaOpcoes">📝</a> -->
+                        <a class="colunaOpcoes" (click)="openConfirmationModal(curso, true)">🗑️</a>
+
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<main class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="form-container">
+        <h2 class="text-center mb-2" style="font-weight: bold; font-size: 1.25rem;">
+          Cadastro de Professor<br />Fatec Votorantim
+        </h2>
+        <form class="row g-3" (submit)="professorService.cadastrar(
+            nome.value,
+            matriculaId.value,
+            unidadeID.value,
+            titulacao.value,
+            referencia.value,
+            lattes.value,
+            [courseId.value],
+            statusAtividade.value,
+            email.value,
+            notes.value
+          )">
+          <div class="col-md-3">
+            <label for="inputNome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="inputNome" name="inputNome" required #nome
+              placeholder="Nome Completo" />
+            <!-- <p id="validacaoNome" class="validacao">Somente letras são permitidas.</p> -->
+          </div>
+          <div class="col-md-3">
+            <label for="inputEmail" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="inputEmail" name="inputEmail" required #email
+              placeholder="E-mail" />
+          </div>
+          <div class="col-md-3">
+            <label for="inputTitulacao" class="form-label">Titulação</label>
+            <select id="inputTitulacao" class="form-select" name="inputTitulacao" required #titulacao>
+              <option disabled selected>Selecione</option>
+              <option value="Especialista">Especialista</option>
+              <option value="Mestre">Mestre</option>
+              <option value="Doutor">Doutor</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="inputNumeroMatricula" class="form-label">Matrícula</label>
+            <input type="number" class="form-control" id="matriculaId" name="inputNumeroMatricula" required
+              placeholder="Número da Matrícula" min="0" inputmode="numeric" #matriculaId />
+            <!-- <p id="validacaoNome" class="validacao">Somente números são permitidos.</p> -->
+          </div>
+          <div class="col-md-3">
+            <label for="inputCodigoUESede" class="form-label">Código UE</label>
+            <select id="inputCodigoUESede" class="form-select" required name="inputCodigoUESede" required #unidadeID>
+              <option disabled selected>Vai deixar o select no front ou consumir do back?</option>
+              <option>Votorantim - 301</option>
+              <option>Sorocaba - 123</option>
+              <option>Tatuí - 900</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="inputCurriculumLates" class="form-label">Lattes (URL)</label>
+            <input type="url" class="form-control" id="inputCurriculumLates" name="inputCurriculumLates" required
+              #lattes placeholder="URL do Lattes" />
+          </div>
+          <div class="col-md-3">
+            <label for="inputReferencia" class="form-label">Referência</label>
+            <input type="text" class="form-control" id="inputReferencia" name="inputReferencia" required #referencia />
+          </div>
+          <div class="col-md-3">
+            <label for="inputNotes" class="form-label">Observações</label>
+            <input type="text" class="form-control" id="inputNotes" name="inputNotes" #notes
+              placeholder="Observações" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Cursos</label>
+            <select class="form-select" multiple required #courseId>
+              <option disabled selected>Selecione</option>
+              <option class="form-check" *ngFor="let curso of cursos" value="{{curso._id}}">{{curso.nome}}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="inputstatusAtividade" class="form-label">Ativo?</label>
+            <select id="inputstatusAtividade" class="form-select" required name="inputstatusAtividade" required
+              #statusAtividade>
+              <option selected>Ativo</option>
+              <option>Desativado</option>
+            </select>
+          </div>
+          <div class="col-12 text-center mt-2">
+            <button type="submit" class="btn btn-secondary" style="width: 15%">
+              Cadastrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
