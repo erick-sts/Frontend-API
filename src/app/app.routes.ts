@@ -42,8 +42,8 @@ export const routes: Routes = [
     //Componentes Visuais
     { path: 'navbar', component: NavbarComponent },
     { path: 'footer', component: FooterComponent },
-    { path: 'botao-imprimir', component: BotaoImprimirComponent},
-    {path: 'alerta', component: AlertaComponent},
+    { path: 'botao-imprimir', component: BotaoImprimirComponent },
+    { path: 'alerta', component: AlertaComponent },
 
 
 ];
