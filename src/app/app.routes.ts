@@ -26,7 +26,8 @@ export const routes: Routes = [
 
     //Login
 
-    { path: '', component: TelaInicioComponent },
+    { path: 'tela-inicio', component: TelaInicioComponent },
+    { path: '', redirectTo: '/tela-inicio', pathMatch: 'full' },
     { path: 'tela-login', component: TelaLoginComponent },
 
     //Central

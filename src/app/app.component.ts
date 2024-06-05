@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       // Defina as rotas onde a navbar deve ser ocultada
-      const hiddenNavbarRoutes = ['/tela-login', '/tela-cadastro-usuario', '/'];
+      const hiddenNavbarRoutes = ['/tela-login', '/tela-cadastro-usuario', '/tela-inicio'];
       this.displayNavbar = !hiddenNavbarRoutes.some(route => event.urlAfterRedirects.startsWith(route));
     });
   }
