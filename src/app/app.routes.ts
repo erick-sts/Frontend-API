@@ -22,6 +22,7 @@ import { FooterComponent } from '../app/components/ComponentesVisuais/footer/foo
 import { BotaoImprimirComponent } from './components/ComponentesVisuais/botao-imprimir/botao-imprimir.component';
 import { AlertaComponent } from './components/ComponentesVisuais/alerta/alerta.component';
 
+
 export const routes: Routes = [
 
     //Login
@@ -45,6 +46,7 @@ export const routes: Routes = [
     { path: 'footer', component: FooterComponent },
     { path: 'botao-imprimir', component: BotaoImprimirComponent },
     { path: 'alerta', component: AlertaComponent },
+
 
 
 ];

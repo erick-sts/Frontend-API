@@ -6,12 +6,15 @@ import { ProfessorService } from '../../../services/Professor/professor.service'
 import { Title } from '@angular/platform-browser';
 import { AlertaComponent } from '../../ComponentesVisuais/alerta/alerta.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {GraficoComponent} from '../../ComponentesVisuais/grafico/grafico.component'
+
+
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, NavbarComponent, AlertaComponent,],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, NavbarComponent, AlertaComponent, GraficoComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

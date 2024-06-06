@@ -5,6 +5,7 @@ import { NavbarComponent } from './components/ComponentesVisuais/navbar/navbar.c
 import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
