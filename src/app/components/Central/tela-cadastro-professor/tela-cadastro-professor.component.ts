@@ -35,8 +35,10 @@ export class TelaCadastroProfessorComponent implements OnInit {
   ngOnInit(): void {
     this.cursosService.listarCursos(this.cursos);
     this.titulo.setTitle("Cadastrar Professor")
-
   }
+
+
+
 
 
 

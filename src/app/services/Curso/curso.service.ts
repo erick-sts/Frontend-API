@@ -36,7 +36,7 @@ export class CursosService {
       coordenador
     }
 
-    this.http.post(this.baseUrl + '/course/', novoCurso).subscribe({
+    this.http.post(`${this.baseUrl}/course/`, novoCurso).subscribe({
       next: (response) => {
         alert(`Cadastro concluído com sucesso! ${JSON.stringify(novoCurso)}`)
         
@@ -49,7 +49,7 @@ export class CursosService {
 
   //Read 📖
   listar() {
-    return this.http.get<any[]>( this.baseUrl +'/course/');
+    return this.http.get<any[]>(`${this.baseUrl}/course/`);
   }
 
   //Update 🔁
@@ -57,7 +57,7 @@ export class CursosService {
 
   //Delete 🗑️
   deletar(id: string) {
-    return this.http.delete<any>(this.baseUrl + '/course/' + id)
+    return this.http.delete<any>(`${this.baseUrl}/course/${id}`)
   }
   // ###
 
@@ -102,7 +102,7 @@ export class CursosService {
     alert(params)
 
 
-    return this.http.get<Object[]>(this.baseUrl + '/course/filter/',  {params} )
+    return this.http.get<Object[]>(`${this.baseUrl}/course/filter/`,  {params} )
 
   }
 

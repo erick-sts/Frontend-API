@@ -18,10 +18,11 @@ export class UsuarioService {
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) {}
 
+  
   cadastrarUsuario(username: string, email: string, password: string) {
     const novoUsuario = { username, email, password };
 
-    this.http.post(this.baseUrl +'/user/', novoUsuario).subscribe({
+    this.http.post(`${this.baseUrl}/user/`, novoUsuario).subscribe({
       next: (response) => {
         console.log('Resposta da atualização:', response);
       },
@@ -35,11 +36,13 @@ export class UsuarioService {
     this.router.navigate(["/tela-login"]);
   }
 
+
+
   login(event: Event, email: string, password: string) {
     const user = { email, password };
     alert('Iniciando login com ' + JSON.stringify(user));
     event.preventDefault();
-    this.http.post<AuthResponse>(this.baseUrl +'/auth/', user).subscribe({
+    this.http.post<AuthResponse>(`${this.baseUrl}/auth/` , user).subscribe({
       
       next: (response) => {
         

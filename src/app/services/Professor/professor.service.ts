@@ -15,8 +15,10 @@ export class ProfessorService {
 
   baseUrl = 'https://backend-api-7cos.onrender.com'
 
-  //Banco de Dados, Interacao com o BackEnd 🎲
 
+
+
+  //Banco de Dados, Interacao com o BackEnd 🎲
 
   //Create 🆕
   cadastrar(
@@ -62,11 +64,10 @@ export class ProfessorService {
 
   }
 
-
   //Read 📖
   listar(): Observable<any[]> {
 
-    return this.http.get<any[]>(this.baseUrl +  '/professors/');
+    return this.http.get<any[]>(`${this.baseUrl}/professors/`);
   }
 
   //Update 🔁
@@ -75,7 +76,7 @@ export class ProfessorService {
       next: (response) => {
         console.log('Resposta da atualização:', response);
         alert("Professor Atualizado com Sucesso!")
-        this.router.navigate(["/"])
+        this.router.navigate(["/tela-relatorio-professor"])
       },
       error: (error) => {
         console.error('Erro ao atualizar Professor:', error);
@@ -86,9 +87,7 @@ export class ProfessorService {
 
   //Delete 🗑️
   deletar(matriculaId: string): Observable<any> {
-    return this.http.delete<any>(
-      this.baseUrl + '/professors/' + matriculaId
-    );
+    return this.http.delete<any>(`${this.baseUrl}/professors/${matriculaId}`);
   }
 
 
@@ -97,11 +96,9 @@ export class ProfessorService {
   // ❗Métodos que usarão o crud porém trabalhando de forma específica. ❗
 
 
-
   //Retorna o professor de acordo com o nome.
   retornaProfessor(nome: String | null): Observable<any> {
-    return this.http.get<any>(this.baseUrl +'/professors/' + nome);
-
+    return this.http.get<any>(`${this.baseUrl}/professors/${nome}`);
 
   }
 
@@ -125,15 +122,6 @@ export class ProfessorService {
       })
     );
   }
-
-
-  //retorna um objeto professor, recebendo como parâmetro no back, seu curso.
-  obterProfessorPorCurso(cursos: string[]): Observable<any> {
-    return this.http.get<any>(
-      this.baseUrl +'/professores/cursos/' + cursos
-    );
-  }
-
 
   //Popula a lista de professores do componente com o que está cadastrado no banco de dados.
   listarProfessores(professores: any[]): void {
@@ -165,9 +153,8 @@ export class ProfessorService {
       params = params.append('titulacoes', titulacoes.join(','));
     }
 
-
     alert(params)
 
-    return this.http.get<Object[]>(this.baseUrl +'/professors/filter', { params });
+    return this.http.get<Object[]>(`${this.baseUrl}/professors/filter`, { params });
   }
 }

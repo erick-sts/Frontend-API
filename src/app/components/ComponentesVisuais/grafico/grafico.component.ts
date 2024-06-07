@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { ProfessorService } from '../../../services/Professor/professor.service';
 
 @Component({
   selector: 'app-grafico',
@@ -7,27 +8,57 @@ import { Chart, registerables } from 'chart.js';
   standalone: true,
   styleUrls: ['./grafico.component.css']
 })
-export class GraficoComponent implements OnInit {
+export class GraficoComponent implements OnInit, AfterViewInit {
+
+  professores: any[] = [];
+
+  constructor(protected professorService: ProfessorService) { }
 
   ngOnInit(): void {
-    this.graficoProfessor();
+    // Registra todos os componentes necessários para o Chart.js
+    Chart.register(...registerables);
+  }
 
-    // Caso queira adicionar o gráfico de cursos, é só descomentar 😊
-    // this.graficoCurso();
+  ngAfterViewInit(): void {
+    // Chama a função para carregar os professores e criar o gráfico
+    this.carregarProfessores();
+  }
 
+  carregarProfessores(): void {
+    this.professorService.listarProfessores(this.professores);
+
+    // Observa a variável 'professores' para detectar quando os dados estão prontos
+    const checkProfessores = setInterval(() => {
+      if (this.professores.length > 0) {
+        clearInterval(checkProfessores);
+        this.graficoProfessor();
+      }
+    }, 100);
   }
 
   graficoProfessor(): void {
-    Chart.register(...registerables); // Registra todos os componentes necessários
+    const titulacoes = this.professores.reduce((acc: any, professor: any) => {
+      const titulacao = professor.titulacao;
+      console.log(professor.titulacao)
+      if (acc[titulacao]) {
+        acc[titulacao]++;
+      } else {
+        acc[titulacao] = 1;
+      }
+      return acc;
+    }, {});
+
+    const label = Object.keys(titulacoes)
+    const data = Object.values(titulacoes);
 
     const ctx = document.getElementById('grafoProfessor') as HTMLCanvasElement;
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Especialista', 'Doutor', 'Mestre'],
+        labels: label,
         datasets: [{
-          label: 'Quantidade de Professores',
-          data: [12, 19, 3, 5, 2, 3],
+          label: 'Quantidade',
+          data: data,
           borderWidth: 1
         }]
       },
@@ -37,11 +68,9 @@ export class GraficoComponent implements OnInit {
             display: true,
             text: 'Relação de Professor e Especialidade',
             font: {
-              size: 20, // Aumenta o tamanho da fonte do título
-
+              size: 20,
             },
             color: '#000000'
-            
           }
         },
         scales: {
@@ -49,36 +78,7 @@ export class GraficoComponent implements OnInit {
             beginAtZero: true
           }
         },
-
       }
     });
   }
-
-  // Caso queira adicionar o gráfico de cursos, é só descomentar 😊
-
-  // graficoCurso(): void{
-  //   Chart.register(...registerables);
-  //   const ctx = document.getElementById('grafoCurso') as HTMLCanvasElement;
-  //   new Chart(ctx, {
-  //     type: 'pie',
-  //     data: {
-  //       labels: ['a', 'b', 'c'],
-  //       datasets: [{
-  //         label: 'Quantidade de Cursos',
-  //         data: [1,2,3],
-  //         borderWidth:1
-  //       }]
-  //     },
-  //     options:{
-  //       scales:{
-  //         y:{
-  //           beginAtZero: true
-  //         }
-  //       }
-  //     }
-  //   })
-  // }
-
-
-
 }

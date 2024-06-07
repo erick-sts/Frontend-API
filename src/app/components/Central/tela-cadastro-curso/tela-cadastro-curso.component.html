@@ -9,20 +9,20 @@
           (submit)="cursoService.cadastrar(nome.value, codigo.value, [disciplinas.value] , sigla.value, modalidade.value, professores.values, coordenador.value)">
           <div class="col-md-4">
             <label for="inputNomeCurso" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="inputNomeCurso" name="inputNomeCurso" #nome required />
+            <input type="text" class="form-control" id="inputNomeCurso" name="inputNomeCurso" #nome required  placeholder="Digite o nome do curso"/>
           </div>
           <div class="col-md-4">
             <label for="inputCodigoCurso" class="form-label">Código</label>
-            <input type="text" class="form-control" id="inputCodigoCurso" name="inputCodigoCurso" #codigo required />
+            <input type="number" class="form-control" id="inputCodigoCurso" name="inputCodigoCurso" #codigo required placeholder="Digite o código" max="9" maxlength="3" />
           </div>
           <div class="col-md-4">
             <label for="inputSiglaCurso" class="form-label">Sigla</label>
-            <input type="text" class="form-control" id="inputSiglaCurso" #sigla name="inputSigla" />
+            <input type="text" class="form-control" id="inputSiglaCurso" #sigla name="inputSigla"  placeholder="Digite a sigla"/>
           </div>
           <div class="col-md-4">
             <label for="inputModalidade">Modalidade</label>
             <select name="inputModalidade" id="inputModalidadeCurso" class="form-select" #modalidade>
-              <option selected disabled>Selecione...</option>
+              <option selected disabled>Selecione a modalidade</option>
               <option value="Presencial">Presencial</option>
               <option value="Híbrido">Híbrido</option>
               <option value="EAD">EaD</option>
@@ -37,12 +37,12 @@
           </div>
           <div class="col-md-4">
             <label for="inputCoordenador" class="form-label">Coordenador</label>
-            <input type="text" class="form-control" name="inputCoordenadorCurso" id="inputCoordenadorCurso" #coordenador>
+            <input type="text" class="form-control" name="inputCoordenadorCurso" id="inputCoordenadorCurso" #coordenador placeholder=" Nome do coordenador">
           </div>
           <div class="col-md-12">
             <label for="inputDisciplinas" class="form-label">Disciplinas</label>
             <textarea type="text" class="form-control" id="inputDisciplinasCurso" #disciplinas
-              name="inputDisciplinas"></textarea>
+              name="inputDisciplinas" placeholder="Digite as disciplinas que compõem o curso"></textarea>
           </div>
           <div class="col-12 text-center mt-2">
             <button type="submit" class="btn btn-secondary" style="width: 15%">
