@@ -80,7 +80,8 @@ export class TelaRelatorioProfessorComponent implements OnInit {
       () => {
         this.professores = this.professores.filter((p) => p !== professor);
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-        modalRef.componentInstance.acao = 'Professor excluído com sucesso.';
+        modalRef.componentInstance.acao = '🗑️';
+        modalRef.componentInstance.mensagem = 'Professor excluído com sucesso.';
         modalRef.componentInstance.mostrarBotoes = false;
 
       },

@@ -17,92 +17,93 @@ import { AlertaComponent } from '../../ComponentesVisuais/alerta/alerta.componen
   styleUrl: './tela-relatorio-curso.component.css'
 })
 export class TelaRelatorioCursoComponent implements OnInit {
-  cursos:any[] = []
+  cursos: any[] = []
   selectedModalidades: string[] = []
 
 
-  constructor (private cursoService : CursosService, private titulo: Title, private router: Router ,private modalService: NgbModal){}
+  constructor(private cursoService: CursosService, private titulo: Title, private router: Router, private modalService: NgbModal) { }
 
-ngOnInit(): void {
-  this.cursoService.listarCursos(this.cursos);
-  this.titulo.setTitle("Relatório de Cursos")
-}
-
-
+  ngOnInit(): void {
+    this.cursoService.listarCursos(this.cursos);
+    this.titulo.setTitle("Relatório de Cursos")
+  }
 
 
 
-limpaFiltro() {
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]') as NodeListOf<HTMLInputElement>
-  const inputs = document.querySelectorAll('input')
 
 
-  checkboxes.forEach(checkbox => { //limpa todos os checkboxes.
-    checkbox.checked = false
-  })
-
-  inputs.forEach(input => { //limpa os inputs normais, no caso, temos o nome.
-    input.value = ""
-  })
-}
+  limpaFiltro() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]') as NodeListOf<HTMLInputElement>
+    const inputs = document.querySelectorAll('input')
 
 
-openConfirmationModal(curso: any, mostrarBotoes: boolean) {
-  const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-  modalRef.componentInstance.mensagem = `Tem certeza que deseja excluir o curso de <strong>${curso.nome}</strong>?`;
+    checkboxes.forEach(checkbox => { //limpa todos os checkboxes.
+      checkbox.checked = false
+    })
 
-  modalRef.componentInstance.acao = 'Excluir Curso';
-  modalRef.componentInstance.mostrarBotoes = mostrarBotoes;
+    inputs.forEach(input => { //limpa os inputs normais, no caso, temos o nome.
+      input.value = ""
+    })
+  }
 
-  modalRef.result.then((result) => {
-    if (result === 'confirm') {
-      this.excluirCurso(curso);
-    }
-  });
-}
 
-excluirCurso(curso: any): void {
-  this.cursoService.deletar(curso._id).subscribe(
-    () => {
-      this.cursos = this.cursos.filter((c) => c !== curso);
-      const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-      modalRef.componentInstance.acao = 'Curso excluído com sucesso.';
-      modalRef.componentInstance.mostrarBotoes = false;
-    },
-    (error: any) => {
-      console.error('Erro ao excluir curso:', error);
-    }
-  );
-}
+  openConfirmationModal(curso: any, mostrarBotoes: boolean) {
+    const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+    modalRef.componentInstance.mensagem = `Tem certeza que deseja excluir o curso de <strong>${curso.nome}</strong>?`;
 
-onCheckboxChange(event: Event, list: string[]) {
-  const checkbox = event.target as HTMLInputElement;
-  const value = checkbox.value;
+    modalRef.componentInstance.acao = 'Excluir Curso';
+    modalRef.componentInstance.mostrarBotoes = mostrarBotoes;
 
-  if (checkbox.checked) {
-    list.push(value);
-  } else {
-    const index = list.indexOf(value);
-    if (index > -1) {
-      list.splice(index, 1);
+    modalRef.result.then((result) => {
+      if (result === 'confirm') {
+        this.excluirCurso(curso);
+      }
+    });
+  }
+
+  excluirCurso(curso: any): void {
+    this.cursoService.deletar(curso._id).subscribe(
+      () => {
+        this.cursos = this.cursos.filter((c) => c !== curso);
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.acao = '🗑️';
+        modalRef.componentInstance.mensagem = 'Curso removido com sucesso.';
+        modalRef.componentInstance.mostrarBotoes = false;
+      },
+      (error: any) => {
+        console.error('Erro ao excluir curso:', error);
+      }
+    );
+  }
+
+  onCheckboxChange(event: Event, list: string[]) {
+    const checkbox = event.target as HTMLInputElement;
+    const value = checkbox.value;
+
+    if (checkbox.checked) {
+      list.push(value);
+    } else {
+      const index = list.indexOf(value);
+      if (index > -1) {
+        list.splice(index, 1);
+      }
     }
   }
-}
 
-filtraCurso(nome: string, coordenador: string, modalidade: string[]) {
-  this.cursos = []
+  filtraCurso(nome: string, coordenador: string, modalidade: string[]) {
+    this.cursos = []
 
-  this.cursoService.filtrarCursos(nome, coordenador, modalidade).subscribe(
-    (cursoEncontrado) => {
+    this.cursoService.filtrarCursos(nome, coordenador, modalidade).subscribe(
+      (cursoEncontrado) => {
 
-      this.cursos.splice(0, this.cursos.length, ...cursoEncontrado)
-    },
-    (error) => {
-      console.error(`Deu erro no ${this.filtraCurso.name} - ${error.message}`)
-    }
-  )
+        this.cursos.splice(0, this.cursos.length, ...cursoEncontrado)
+      },
+      (error) => {
+        console.error(`Deu erro no ${this.filtraCurso.name} - ${error.message}`)
+      }
+    )
 
-}
+  }
 
 
 

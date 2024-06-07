@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Route } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertaComponent } from '../../components/ComponentesVisuais/alerta/alerta.component';
 
 
 @Injectable({
@@ -10,13 +12,13 @@ import { Route } from '@angular/router';
 export class CursosService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private modalService: NgbModal) { }
 
 
   //Banco de Dados, Interacao com o BackEnd 🎲
 
   baseUrl = 'https://backend-api-7cos.onrender.com'
-  
+
   //Create 🆕
   cadastrar(
     nome: String,
@@ -38,11 +40,20 @@ export class CursosService {
 
     this.http.post(`${this.baseUrl}/course/`, novoCurso).subscribe({
       next: (response) => {
-        alert(`Cadastro concluído com sucesso! ${JSON.stringify(novoCurso)}`)
-        
+
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.acao = 'Cadastro de Curso.';
+        modalRef.componentInstance.mensagem = 'Curso cadastrado com sucesso!';
+        modalRef.componentInstance.mostrarBotoes = false;
+
       },
       error: (error) => {
-        alert(`Deu erro no cadastramento de cursos: ${error.message}`)
+        console.error(error);
+
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.acao = 'Cadastro de Curso.';
+        modalRef.componentInstance.mensagem = 'Erro ao cadastrar Curso!';
+        modalRef.componentInstance.mostrarBotoes = false;
       }
     })
   }
@@ -68,8 +79,8 @@ export class CursosService {
 
 
 
- // ❗Métodos que usarão o crud porém trabalhando de forma específica. ❗
- 
+  // ❗Métodos que usarão o crud porém trabalhando de forma específica. ❗
+
   listarCursos(cursos: any[]) {
     this.listar().subscribe(
       (cursosCadastrados) => {
@@ -85,9 +96,9 @@ export class CursosService {
 
 
 
-//Filtra cursos com base nos dados selecionados na interface.
+  //Filtra cursos com base nos dados selecionados na interface.
 
-  filtrarCursos(nome: string, coordenador: string, modalidade: string[]): Observable<Object[]>{
+  filtrarCursos(nome: string, coordenador: string, modalidade: string[]): Observable<Object[]> {
     let params = new HttpParams();
     if (nome) {
       params = params.append('nome', nome);
@@ -102,7 +113,7 @@ export class CursosService {
     alert(params)
 
 
-    return this.http.get<Object[]>(`${this.baseUrl}/course/filter/`,  {params} )
+    return this.http.get<Object[]>(`${this.baseUrl}/course/filter/`, { params })
 
   }
 

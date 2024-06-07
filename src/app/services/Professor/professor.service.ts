@@ -2,6 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertaComponent } from '../../components/ComponentesVisuais/alerta/alerta.component';
 
 
 @Injectable({
@@ -11,7 +13,7 @@ export class ProfessorService {
 
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) { }
 
   baseUrl = 'https://backend-api-7cos.onrender.com'
 
@@ -51,13 +53,19 @@ export class ProfessorService {
       .subscribe({
         next: (response) => {
           console.log('Resposta da atualização:', response);
-          //trocar pelo modal
-          alert("Professor Cadastrado com sucesso! ${JSON.stringify(novoProfessor)}");
+          const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+          modalRef.componentInstance.acao = 'Cadastro 📝';
+          modalRef.componentInstance.mensagem = 'Professor cadastrado com sucesso. 🚀';
+          modalRef.componentInstance.mostrarBotoes = false;
           this.router.navigate(["/home"])
         },
         error: (error) => {
-          //trocar pelo modal
-          alert('Erro ao cadastrar Professor:' + error.message);
+          console.log('Resposta da atualização:', error);
+
+          const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+          modalRef.componentInstance.acao = 'Cadastro 📝';
+          modalRef.componentInstance.mensagem = 'Erro ao cadastrar professor. ❌';
+          modalRef.componentInstance.mostrarBotoes = false;
         },
       });
 

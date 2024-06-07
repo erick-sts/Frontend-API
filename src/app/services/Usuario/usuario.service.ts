@@ -16,9 +16,9 @@ export class UsuarioService {
 
   baseUrl = 'https://backend-api-7cos.onrender.com'
 
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) {}
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) { }
 
-  
+
   cadastrarUsuario(username: string, email: string, password: string) {
     const novoUsuario = { username, email, password };
 
@@ -40,14 +40,15 @@ export class UsuarioService {
 
   login(event: Event, email: string, password: string) {
     const user = { email, password };
-    alert('Iniciando login com ' + JSON.stringify(user));
     event.preventDefault();
-    this.http.post<AuthResponse>(`${this.baseUrl}/auth/` , user).subscribe({
-      
+    this.http.post<AuthResponse>(`${this.baseUrl}/auth/`, user).subscribe({
+
       next: (response) => {
-        
-        alert('Resposta da atualização:' + response);
-        
+
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.mensagem = 'Bem vindo!'; //adicionar o nome do Usuario aqui
+        modalRef.componentInstance.mostrarBotoes = false;
+
         if (response.token) {
           console.log('Login bem-sucedido, token:', response.token);
           localStorage.setItem('token', response.token);
@@ -58,7 +59,10 @@ export class UsuarioService {
       },
       error: (error) => {
         console.error('Erro ao realizar o login:', error);
-        alert('Erro ao realizar o login: ' + error.message);
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.acao = 'Ops!';
+        modalRef.componentInstance.mensagem = 'Algo deu errado, tente novamente';
+        modalRef.componentInstance.mostrarBotoes = false;
       },
     });
   }
