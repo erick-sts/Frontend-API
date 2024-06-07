@@ -27,41 +27,9 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.professorService.listarProfessores(this.professores)
     this.titulo.setTitle("Página Inicial")
 
   }
 
-
-
-
-  openConfirmationModal(professor: any, mostrarBotoes: boolean) {
-    const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-    modalRef.componentInstance.mensagem = `Tem certeza que deseja excluir o professor <strong>${professor.nome}</strong>?`;
-
-    modalRef.componentInstance.acao = 'Excluir Professor';
-    modalRef.componentInstance.mostrarBotoes = mostrarBotoes;
-
-    modalRef.result.then((result) => {
-      if (result === 'confirm') {
-        this.excluirProfessor(professor);
-      }
-    });
-  }
-
-  excluirProfessor(professor: any): void {
-    this.professorService.deletar(professor._id).subscribe(
-      () => {
-        this.professores = this.professores.filter((p) => p !== professor);
-        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-        modalRef.componentInstance.acao = 'Professor excluído com sucesso.';
-        modalRef.componentInstance.mostrarBotoes = false;
-        this.router.navigate(['/']);
-      },
-      (error: any) => {
-        console.error('Erro ao excluir professor:', error);
-      }
-    );
-  }
 
 }

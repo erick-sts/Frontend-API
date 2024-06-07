@@ -13,6 +13,8 @@ export class ProfessorService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  baseUrl = 'https://backend-api-7cos.onrender.com'
+
   //Banco de Dados, Interacao com o BackEnd 🎲
 
 
@@ -43,7 +45,7 @@ export class ProfessorService {
     }
 
     this.http
-      .post<any>('http://localhost:3000/professors/', novoProfessor)
+      .post<any>(this.baseUrl + '/professors/', novoProfessor)
       .subscribe({
         next: (response) => {
           console.log('Resposta da atualização:', response);
@@ -64,12 +66,12 @@ export class ProfessorService {
   //Read 📖
   listar(): Observable<any[]> {
 
-    return this.http.get<any[]>('http://localhost:3000/professors/');
+    return this.http.get<any[]>(this.baseUrl +  '/professors/');
   }
 
   //Update 🔁
   atualizar(id: string, professorAtualizado: any) {
-    return this.http.put<any>(`http://localhost:3000/professors/${id}`, professorAtualizado).subscribe({
+    return this.http.put<any>(`${this.baseUrl}/professors/${id}`, professorAtualizado).subscribe({
       next: (response) => {
         console.log('Resposta da atualização:', response);
         alert("Professor Atualizado com Sucesso!")
@@ -85,7 +87,7 @@ export class ProfessorService {
   //Delete 🗑️
   deletar(matriculaId: string): Observable<any> {
     return this.http.delete<any>(
-      'http://localhost:3000/professors/' + matriculaId
+      this.baseUrl + '/professors/' + matriculaId
     );
   }
 
@@ -98,7 +100,7 @@ export class ProfessorService {
 
   //Retorna o professor de acordo com o nome.
   retornaProfessor(nome: String | null): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/professors/' + nome);
+    return this.http.get<any>(this.baseUrl +'/professors/' + nome);
 
 
   }
@@ -128,7 +130,7 @@ export class ProfessorService {
   //retorna um objeto professor, recebendo como parâmetro no back, seu curso.
   obterProfessorPorCurso(cursos: string[]): Observable<any> {
     return this.http.get<any>(
-      'https://api-rest-fatec-backend.onrender.com/professores/cursos/' + cursos
+      this.baseUrl +'/professores/cursos/' + cursos
     );
   }
 
@@ -166,6 +168,6 @@ export class ProfessorService {
 
     alert(params)
 
-    return this.http.get<Object[]>('http://localhost:3000/professors/filter', { params });
+    return this.http.get<Object[]>(this.baseUrl +'/professors/filter', { params });
   }
 }
