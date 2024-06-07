@@ -1,4 +1,11 @@
-#myChart{
+#chartContainer{
+    display: flex;
+    justify-content: space-around;
+    height: 70vh;
+    width: 80vw;
+}
+
+#grafoProfessor #grafoCurso{
     width: 100px;
     height: 100px;
 }

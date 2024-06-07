@@ -14,12 +14,14 @@ interface AuthResponse {
 })
 export class UsuarioService {
 
+  baseUrl = 'https://backend-api-7cos.onrender.com'
+
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) {}
 
   cadastrarUsuario(username: string, email: string, password: string) {
     const novoUsuario = { username, email, password };
 
-    this.http.post('http://localhost:3000/user/', novoUsuario).subscribe({
+    this.http.post(this.baseUrl +'/user/', novoUsuario).subscribe({
       next: (response) => {
         console.log('Resposta da atualização:', response);
       },
@@ -37,7 +39,7 @@ export class UsuarioService {
     const user = { email, password };
     alert('Iniciando login com ' + JSON.stringify(user));
     event.preventDefault();
-    this.http.post<AuthResponse>('http://localhost:3000/auth/', user).subscribe({
+    this.http.post<AuthResponse>(this.baseUrl +'/auth/', user).subscribe({
       
       next: (response) => {
         
