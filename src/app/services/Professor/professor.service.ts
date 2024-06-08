@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
@@ -17,7 +17,12 @@ export class ProfessorService {
 
   baseUrl = 'https://backend-api-7cos.onrender.com'
 
-
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
 
   //Banco de Dados, Interacao com o BackEnd 🎲
@@ -48,11 +53,13 @@ export class ProfessorService {
       notes
     }
 
+    const headers = this.getAuthHeaders();
+
     this.http
-      .post<any>(this.baseUrl + '/professors/', novoProfessor)
+      .post<any>(this.baseUrl + '/professors/', novoProfessor, {headers})
       .subscribe({
         next: (response) => {
-          console.log('Resposta da atualização:', response);
+          console.log('Resposta da atualização:', response)
           const modalRef = this.modalService.open(AlertaComponent, { centered: true });
           modalRef.componentInstance.acao = 'Cadastro 📝';
           modalRef.componentInstance.mensagem = 'Professor cadastrado com sucesso. 🚀';
@@ -74,13 +81,14 @@ export class ProfessorService {
 
   //Read 📖
   listar(): Observable<any[]> {
-
-    return this.http.get<any[]>(`${this.baseUrl}/professors/`);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(`${this.baseUrl}/professors/`, {headers});
   }
 
   //Update 🔁
   atualizar(id: string, professorAtualizado: any) {
-    return this.http.put<any>(`${this.baseUrl}/professors/${id}`, professorAtualizado).subscribe({
+    const headers = this.getAuthHeaders();
+    return this.http.put<any>(`${this.baseUrl}/professors/${id}`, professorAtualizado, {headers}).subscribe({
       next: (response) => {
         console.log('Resposta da atualização:', response);
         alert("Professor Atualizado com Sucesso!")
@@ -95,7 +103,8 @@ export class ProfessorService {
 
   //Delete 🗑️
   deletar(matriculaId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/professors/${matriculaId}`);
+    const headers = this.getAuthHeaders();
+    return this.http.delete<any>(`${this.baseUrl}/professors/${matriculaId}`, {headers});
   }
 
 
@@ -106,7 +115,8 @@ export class ProfessorService {
 
   //Retorna o professor de acordo com o nome.
   retornaProfessor(nome: String | null): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/professors/${nome}`);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any>(`${this.baseUrl}/professors/${nome}`, { headers });
 
   }
 
@@ -163,6 +173,8 @@ export class ProfessorService {
 
     alert(params)
 
-    return this.http.get<Object[]>(`${this.baseUrl}/professors/filter`, { params });
+    const headers = this.getAuthHeaders();
+
+    return this.http.get<Object[]>(`${this.baseUrl}/professors/filter`, { params, headers });
   }
 }

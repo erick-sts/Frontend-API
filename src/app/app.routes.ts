@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
 
+//Guard
+import { AuthGuard } from './guards/auth.guard';
+
 //Login
 import { TelaInicioComponent } from './components/Login/tela-inicio/tela-inicio.component';
 import { TelaLoginComponent } from './components/Login/tela-login/tela-login.component';
@@ -32,14 +35,14 @@ export const routes: Routes = [
     { path: 'tela-login', component: TelaLoginComponent },
 
     //Central
-    { path: 'home', component: HomeComponent },
-    { path: 'tela-cadastro-curso', component: TelaCadastroCursoComponent },
-    { path: 'tela-cadastro-professor', component: TelaCadastroProfessorComponent },
-    { path: 'tela-cadastro-usuario', component: TelaCadastroUsuarioComponent },
-    { path: 'tela-relatorio-professor', component: TelaRelatorioProfessorComponent },
-    { path: 'tela-relatorio-curso', component: TelaRelatorioCursoComponent },
-    { path: 'tela-editar-professor/:nome', component: TelaEditarProfessorComponent },
-    { path: 'tela-professor/:nome', component: TelaProfessorComponent },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'tela-cadastro-curso', component: TelaCadastroCursoComponent, canActivate: [AuthGuard] },
+    { path: 'tela-cadastro-professor', component: TelaCadastroProfessorComponent, canActivate: [AuthGuard] },
+    { path: 'tela-cadastro-usuario', component: TelaCadastroUsuarioComponent},
+    { path: 'tela-relatorio-professor', component: TelaRelatorioProfessorComponent, canActivate: [AuthGuard] },
+    { path: 'tela-relatorio-curso', component: TelaRelatorioCursoComponent, canActivate: [AuthGuard] },
+    { path: 'tela-editar-professor/:nome', component: TelaEditarProfessorComponent, canActivate: [AuthGuard] },
+    { path: 'tela-professor/:nome', component: TelaProfessorComponent, canActivate: [AuthGuard] },
 
     //Componentes Visuais
     { path: 'navbar', component: NavbarComponent },

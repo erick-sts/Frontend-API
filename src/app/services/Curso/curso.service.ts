@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Route } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +14,14 @@ export class CursosService {
 
   constructor(private http: HttpClient, private modalService: NgbModal) { }
 
+
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
   //Banco de Dados, Interacao com o BackEnd 🎲
 
@@ -38,7 +46,9 @@ export class CursosService {
       coordenador
     }
 
-    this.http.post(`${this.baseUrl}/course/`, novoCurso).subscribe({
+    const headers = this.getAuthHeaders();
+
+    this.http.post(`${this.baseUrl}/course/`, novoCurso, { headers }).subscribe({
       next: (response) => {
 
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
@@ -60,7 +70,8 @@ export class CursosService {
 
   //Read 📖
   listar() {
-    return this.http.get<any[]>(`${this.baseUrl}/course/`);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(`${this.baseUrl}/course/`, {headers});
   }
 
   //Update 🔁
@@ -68,7 +79,8 @@ export class CursosService {
 
   //Delete 🗑️
   deletar(id: string) {
-    return this.http.delete<any>(`${this.baseUrl}/course/${id}`)
+    const headers = this.getAuthHeaders();
+    return this.http.delete<any>(`${this.baseUrl}/course/${id}`, {headers})
   }
   // ###
 
