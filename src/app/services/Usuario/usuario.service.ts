@@ -46,11 +46,11 @@ export class UsuarioService {
       next: (response) => {
 
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-        modalRef.componentInstance.mensagem = 'Bem vindo!'; //adicionar o nome do Usuario aqui
+        modalRef.componentInstance.mensagem = response.message;
         modalRef.componentInstance.mostrarBotoes = false;
 
         if (response.token) {
-          console.log('Login bem-sucedido, token:', response.token);
+          // console.log('Login bem-sucedido, token:', response.token);
           localStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         } else {

@@ -5,7 +5,7 @@
         <h2 class="text-center mb-2" style="font-weight: bold; font-size: 1.25rem;">
           Cadastro de Professor<br />Fatec Votorantim
         </h2>
-        <form class="row g-3" (submit)="professorService.cadastrar(
+        <form class="row g-3" (submit)="professorService.cadastrar($event,
             nome.value,
             matriculaId.value,
             unidadeID.value,

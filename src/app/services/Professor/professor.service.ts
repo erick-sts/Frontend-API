@@ -29,6 +29,7 @@ export class ProfessorService {
 
   //Create 🆕
   cadastrar(
+    event: Event,
     nome: String,
     matriculaId: String,
     unidadeId: String,
@@ -54,9 +55,9 @@ export class ProfessorService {
     }
 
     const headers = this.getAuthHeaders();
-
+    event.preventDefault();
     this.http
-      .post<any>(this.baseUrl + '/professors/', novoProfessor, {headers})
+      .post<any>(this.baseUrl + '/professors/', novoProfessor, { headers })
       .subscribe({
         next: (response) => {
           console.log('Resposta da atualização:', response)
@@ -82,21 +83,28 @@ export class ProfessorService {
   //Read 📖
   listar(): Observable<any[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(`${this.baseUrl}/professors/`, {headers});
+    return this.http.get<any[]>(`${this.baseUrl}/professors/`, { headers });
   }
 
   //Update 🔁
   atualizar(id: string, professorAtualizado: any) {
     const headers = this.getAuthHeaders();
-    return this.http.put<any>(`${this.baseUrl}/professors/${id}`, professorAtualizado, {headers}).subscribe({
+    return this.http.put<any>(`${this.baseUrl}/professors/${id}`, professorAtualizado, { headers }).subscribe({
       next: (response) => {
         console.log('Resposta da atualização:', response);
-        alert("Professor Atualizado com Sucesso!")
+
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.acao = 'Atualização 🔁';
+        modalRef.componentInstance.mensagem = 'Professor atualizado com sucesso! ✅';
+        modalRef.componentInstance.mostrarBotoes = false;
         this.router.navigate(["/tela-relatorio-professor"])
       },
       error: (error) => {
         console.error('Erro ao atualizar Professor:', error);
-        alert('Erro ao atualizar Professor: ' + error.message);
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.acao = 'Atualização 🔁';
+        modalRef.componentInstance.mensagem = 'Erro ao atualizar o professor! ❌';
+        modalRef.componentInstance.mostrarBotoes = false;
       }
     })
   }
@@ -104,7 +112,7 @@ export class ProfessorService {
   //Delete 🗑️
   deletar(matriculaId: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.delete<any>(`${this.baseUrl}/professors/${matriculaId}`, {headers});
+    return this.http.delete<any>(`${this.baseUrl}/professors/${matriculaId}`, { headers });
   }
 
 
