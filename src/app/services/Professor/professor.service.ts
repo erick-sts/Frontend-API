@@ -63,7 +63,7 @@ export class ProfessorService {
           console.log('Resposta da atualização:', response)
           const modalRef = this.modalService.open(AlertaComponent, { centered: true });
           modalRef.componentInstance.acao = 'Cadastro 📝';
-          modalRef.componentInstance.mensagem = 'Professor cadastrado com sucesso. 🚀';
+          modalRef.componentInstance.mensagem = response.message;
           modalRef.componentInstance.mostrarBotoes = false;
           this.router.navigate(["/home"])
         },
@@ -72,7 +72,7 @@ export class ProfessorService {
 
           const modalRef = this.modalService.open(AlertaComponent, { centered: true });
           modalRef.componentInstance.acao = 'Cadastro 📝';
-          modalRef.componentInstance.mensagem = 'Erro ao cadastrar professor. ❌';
+          modalRef.componentInstance.mensagem = error.message;
           modalRef.componentInstance.mostrarBotoes = false;
         },
       });
@@ -95,7 +95,7 @@ export class ProfessorService {
 
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Atualização 🔁';
-        modalRef.componentInstance.mensagem = 'Professor atualizado com sucesso! ✅';
+        modalRef.componentInstance.mensagem = response.message;
         modalRef.componentInstance.mostrarBotoes = false;
         this.router.navigate(["/tela-relatorio-professor"])
       },
@@ -103,7 +103,7 @@ export class ProfessorService {
         console.error('Erro ao atualizar Professor:', error);
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Atualização 🔁';
-        modalRef.componentInstance.mensagem = 'Erro ao atualizar o professor! ❌';
+        modalRef.componentInstance.mensagem = error.message;
         modalRef.componentInstance.mostrarBotoes = false;
       }
     })

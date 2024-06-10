@@ -77,11 +77,11 @@ export class TelaRelatorioProfessorComponent implements OnInit {
 
   excluirProfessor(professor: any): void {
     this.professorService.deletar(professor._id).subscribe(
-      () => {
+      (response) => {
         this.professores = this.professores.filter((p) => p !== professor);
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = '🗑️';
-        modalRef.componentInstance.mensagem = 'Professor excluído com sucesso.';
+        modalRef.componentInstance.mensagem = response.message;
         modalRef.componentInstance.mostrarBotoes = false;
 
       },

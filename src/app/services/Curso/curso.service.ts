@@ -5,6 +5,10 @@ import { Route } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertaComponent } from '../../components/ComponentesVisuais/alerta/alerta.component';
 
+interface HttpResponse {
+  message: string;
+ 
+}
 
 @Injectable({
   providedIn: 'root'
@@ -48,12 +52,12 @@ export class CursosService {
 
     const headers = this.getAuthHeaders();
 
-    this.http.post(`${this.baseUrl}/course/`, novoCurso, { headers }).subscribe({
+    this.http.post<HttpResponse>(`${this.baseUrl}/course/`, novoCurso, { headers }).subscribe({
       next: (response) => {
-
+        console.log(response)
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Cadastro de Curso.';
-        modalRef.componentInstance.mensagem = 'Curso cadastrado com sucesso!';
+        modalRef.componentInstance.mensagem = response.message;
         modalRef.componentInstance.mostrarBotoes = false;
 
       },
