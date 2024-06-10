@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Route } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertaComponent } from '../../components/ComponentesVisuais/alerta/alerta.component';
 
@@ -16,7 +16,8 @@ interface HttpResponse {
 export class CursosService {
 
 
-  constructor(private http: HttpClient, private modalService: NgbModal) { }
+
+  constructor(private http: HttpClient, private modalService: NgbModal, private router: Router) { }
 
 
 
@@ -56,16 +57,16 @@ export class CursosService {
       next: (response) => {
         console.log(response)
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-        modalRef.componentInstance.acao = 'Cadastro de Curso.';
+        modalRef.componentInstance.acao = 'Cadastro de Curso 📝';
         modalRef.componentInstance.mensagem = response.message;
         modalRef.componentInstance.mostrarBotoes = false;
-
+       this.router.navigate(["/home"])
       },
       error: (error) => {
         console.error(error);
 
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-        modalRef.componentInstance.acao = 'Cadastro de Curso.';
+        modalRef.componentInstance.acao = 'Cadastro de Curso 📝';
         modalRef.componentInstance.mensagem = 'Erro ao cadastrar Curso!';
         modalRef.componentInstance.mostrarBotoes = false;
       }

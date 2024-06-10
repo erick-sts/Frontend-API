@@ -62,7 +62,7 @@ export class ProfessorService {
         next: (response) => {
           console.log('Resposta da atualização:', response)
           const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-          modalRef.componentInstance.acao = 'Cadastro 📝';
+          modalRef.componentInstance.acao = 'Cadastro de Professor 📝';
           modalRef.componentInstance.mensagem = response.message;
           modalRef.componentInstance.mostrarBotoes = false;
           this.router.navigate(["/home"])
@@ -71,7 +71,7 @@ export class ProfessorService {
           console.log('Resposta da atualização:', error);
 
           const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-          modalRef.componentInstance.acao = 'Cadastro 📝';
+          modalRef.componentInstance.acao = 'Cadastro de Professor 📝';
           modalRef.componentInstance.mensagem = error.message;
           modalRef.componentInstance.mostrarBotoes = false;
         },

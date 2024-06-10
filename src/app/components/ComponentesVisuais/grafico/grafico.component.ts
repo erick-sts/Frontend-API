@@ -68,7 +68,7 @@ export class GraficoComponent implements OnInit, AfterViewInit {
             display: true,
             text: 'Relação de Professor e Especialidade',
             font: {
-              size: 20,
+              size: 15,
             },
             color: '#000000'
           }

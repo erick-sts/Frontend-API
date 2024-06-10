@@ -1,11 +1,8 @@
 #chartContainer{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     height: 70vh;
-    width: 80vw;
+    width: 100%;
 }
 
-#grafoProfessor #grafoCurso{
-    width: 100px;
-    height: 100px;
-}
