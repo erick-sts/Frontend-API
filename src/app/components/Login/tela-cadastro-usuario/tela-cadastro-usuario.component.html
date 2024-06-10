@@ -11,7 +11,7 @@
                             <h4 class="text-center">Cadastro de Usuário</h4>
                         </div>
                         <div class="card-body">
-                            <form (submit)="usuarioService.cadastrarUsuario(username.value, email.value, password.value)">
+                            <form (submit)="usuarioService.cadastrarUsuario($event, username.value, email.value, password.value)">
                                 <div class="form-group">
                                     <label for="userName">Nome:</label>
                                     <input type="text" class="form-control" id="userName" #username placeholder="Digite seu nome" required>

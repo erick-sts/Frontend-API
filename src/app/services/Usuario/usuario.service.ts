@@ -19,21 +19,26 @@ export class UsuarioService {
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) { }
 
 
-  cadastrarUsuario(username: string, email: string, password: string) {
+  cadastrarUsuario(event: Event, username: string, email: string, password: string) {
     const novoUsuario = { username, email, password };
-
-    this.http.post(`${this.baseUrl}/user/`, novoUsuario).subscribe({
+    event.preventDefault();
+    this.http.post<AuthResponse>(`${this.baseUrl}/user/`, novoUsuario).subscribe({
       next: (response) => {
         console.log('Resposta da atualização:', response);
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.mensagem = response.message;
+        modalRef.componentInstance.mostrarBotoes = false;
+        this.router.navigate(["/tela-login"]);
       },
-      error: (error) => {
-        alert('Erro ao cadastrar Usuário:' + error.message);
+      error: (err) => {
+        // alert('Erro ao cadastrar Usuário:' + err.message);
+        const errorMessage = err.error.message || 'Erro desconhecido';
+        const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+        modalRef.componentInstance.mensagem = errorMessage;
+        modalRef.componentInstance.mostrarBotoes = false;
       },
     });
-    const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-    modalRef.componentInstance.acao = 'Usuário cadastrado com sucesso.';
-    modalRef.componentInstance.mostrarBotoes = false;
-    this.router.navigate(["/tela-login"]);
+
   }
 
 
@@ -57,11 +62,13 @@ export class UsuarioService {
           alert('Login falhou. Tente novamente.');
         }
       },
-      error: (error) => {
-        console.error('Erro ao realizar o login:', error);
+      error: (err) => {
+        console.error('Erro ao realizar o login:', err);
+        const errorMessage = err.error.message || 'Erro desconhecido';
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Ops!';
-        modalRef.componentInstance.mensagem = 'Algo deu errado, tente novamente';
+        modalRef.componentInstance.mensagem = errorMessage;
+        ;
         modalRef.componentInstance.mostrarBotoes = false;
       },
     });
