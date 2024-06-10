@@ -16,3 +16,11 @@ body{
 #topicos{
     justify-content: center;
 }
+
+.colunaOpcoes{
+    text-decoration: none;
+    
+    #lixeira{
+        cursor: pointer;
+    }
+}

@@ -179,7 +179,7 @@ export class ProfessorService {
       params = params.append('titulacoes', titulacoes.join(','));
     }
 
-    alert(params)
+    
 
     const headers = this.getAuthHeaders();
 

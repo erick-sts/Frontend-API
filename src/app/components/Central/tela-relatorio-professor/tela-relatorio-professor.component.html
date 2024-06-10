@@ -91,7 +91,7 @@
                         <a class="colunaOpcoes" [routerLink]="['/tela-professor', professor.nome]">➕</a>
                         <a class="colunaOpcoes" [routerLink]="['/tela-editar-professor', professor.nome]"
                             class="colunaOpcoes">📝</a>
-                        <a class="colunaOpcoes" (click)="openConfirmationModal(professor, true)">🗑️</a>
+                        <a class="colunaOpcoes" id="lixeira" (click)="openConfirmationModal(professor, true)">🗑️</a>
 
                     </td>
                 </tr>

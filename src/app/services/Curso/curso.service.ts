@@ -122,10 +122,10 @@ export class CursosService {
       params = params.append('coordenador', coordenador);
     }
 
-    alert(params)
+    const headers = this.getAuthHeaders();
 
 
-    return this.http.get<Object[]>(`${this.baseUrl}/course/filter/`, { params })
+    return this.http.get<Object[]>(`${this.baseUrl}/course/filter/`, { params, headers })
 
   }
 

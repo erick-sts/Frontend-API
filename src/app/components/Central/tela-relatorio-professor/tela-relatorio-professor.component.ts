@@ -91,20 +91,7 @@ export class TelaRelatorioProfessorComponent implements OnInit {
     );
   }
 
-  limpaFiltro() {
 
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]') as NodeListOf<HTMLInputElement>
-    const inputs = document.querySelectorAll('input')
-
-    checkboxes.forEach(checkbox => { //limpa todos os checkboxes.
-      checkbox.checked = false 
-      checkbox.dispatchEvent(new Event('change'));
-    })
-
-    inputs.forEach(input => { //limpa os inputs tipo texto, no caso, temos o nome.
-      input.value = ""
-    })
-  }
 
   filtraProfessor(nome: string, cursos: string[], titulacoes: string[]) {
     this.professores = []
