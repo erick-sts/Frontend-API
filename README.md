@@ -50,6 +50,7 @@ Essa API RESTful utiliza os métodos HTTP POST, GET, PUT e DELETE, completando o
 > - Links para os repositórios criados:
 >    - **Frontend:** [acessar Frontend](https://github.com/erick-sts/Frontend-API)
 >    - **Backend:** [acessar Backend](https://github.com/leonfagundes27/Backend-API)
+>    - **API - Publicada:** https://frontend-api-git-main-ericksts-projects.vercel.app/tela-inicio
  
 → [Voltar ao topo](#topo)
  
