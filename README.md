@@ -48,6 +48,7 @@ Essa API RESTful utiliza os métodos HTTP POST, GET, PUT e DELETE, completando o
 > 🔗 **Links gerais** <br>
 > - Documentação do software: [clique aqui para acessar](https://github.com/VitorRuan/Sprints/tree/main/Documenta%C3%A7%C3%A3o)
 > - Links para os repositórios criados:
+>    - **Protótipo de alta fidelidade:** https://www.figma.com/design/NCJqrhXPo5UtXdP53Y6jKO/Cadastro-de-professor-para-Secretaria.-PI---FATEC-VOTORANTIM?node-id=0-1
 >    - **Frontend:** [acessar Frontend](https://github.com/erick-sts/Frontend-API)
 >    - **Backend:** [acessar Backend](https://github.com/leonfagundes27/Backend-API)
 >    - **API - Publicada:** https://frontend-api-git-main-ericksts-projects.vercel.app/tela-inicio
