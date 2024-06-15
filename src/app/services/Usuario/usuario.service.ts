@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertaComponent } from '../../components/ComponentesVisuais/alerta/alerta.component';
+import { BehaviorSubject } from 'rxjs';
+
 
 interface AuthResponse {
   message: string;
@@ -15,6 +17,8 @@ interface AuthResponse {
 export class UsuarioService {
 
   baseUrl = 'https://backend-api-7cos.onrender.com'
+
+  loading = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) { }
 
@@ -46,9 +50,12 @@ export class UsuarioService {
   login(event: Event, email: string, password: string) {
     const user = { email, password };
     event.preventDefault();
+    this.loading.next(true);
     this.http.post<AuthResponse>(`${this.baseUrl}/auth/`, user).subscribe({
 
       next: (response) => {
+
+        this.loading.next(false);
 
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.mensagem = response.message;
@@ -63,6 +70,7 @@ export class UsuarioService {
         }
       },
       error: (err) => {
+        this.loading.next(false);
         console.error('Erro ao realizar o login:', err);
         const errorMessage = err.error.message || 'Erro desconhecido';
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
