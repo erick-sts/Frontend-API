@@ -93,19 +93,32 @@ export class TelaRelatorioProfessorComponent implements OnInit {
 
 
 
-  filtraProfessor(nome: string, cursos: string[], titulacoes: string[]) {
-    this.professores = []
+  filtraProfessor(nome: string, cursos: string[], titulacoes: string[]): void {
+    this.professores = [];
 
     this.professorService.filtrarProfessores(nome, cursos, titulacoes).subscribe(
       (professorEncontrado) => {
-
-        this.professores.splice(0, this.professores.length, ...professorEncontrado)
+        if (professorEncontrado.length === 0) {
+          // Se nenhum professor encontrado, abrir o modal de alerta
+          this.openNenhumProfessorEncontradoModal();
+        } else {
+          // Caso contrário, atualizar a lista de professores
+          this.professores = professorEncontrado;
+        }
       },
       (error) => {
-        console.error(`Deu erro no ${this.filtraProfessor.name} - ${error.message}`)
+        console.error(`Erro ao filtrar professores: ${error.message}`);
       }
-    )
-
+    );
   }
 
+  openNenhumProfessorEncontradoModal(): void {
+    const modalRef = this.modalService.open(AlertaComponent, { centered: true });
+    modalRef.componentInstance.acao = 'Ops!';
+    modalRef.componentInstance.mensagem = 'Nenhum professor encontrado com os filtros aplicados.';
+    modalRef.componentInstance.mostrarBotoes = false;
+
+    this.professorService.listarProfessores(this.professores)
+    
+  }
 }

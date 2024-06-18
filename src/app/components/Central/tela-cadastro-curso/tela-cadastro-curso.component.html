@@ -1,10 +1,10 @@
-<main class="container mt-3">
+<main class="container mt-2" style="height: 85vh;">
   <div class="row justify-content-center">
-    <div class="col-lg-8">
+    <div class="card col-lg-8">
       <div class="form-container">
-        <h4 class="text-center mb-2">
+        <h5 class="text-center mb-1 mt-1">
           Cadastro de Curso<br />Fatec Votorantim
-        </h4>
+        </h5>
         <form class="row g-2"
           (submit)="cursoService.cadastrar(nome.value, codigo.value, [disciplinas.value] , sigla.value, modalidade.value, professores.values, coordenador.value)">
           <div class="col-md-4">
@@ -42,9 +42,9 @@
           <div class="col-md-12">
             <label for="inputDisciplinas" class="form-label">Disciplinas</label>
             <textarea type="text" class="form-control" id="inputDisciplinasCurso" #disciplinas
-              name="inputDisciplinas" placeholder="Digite as disciplinas que compõem o curso"></textarea>
+              name="inputDisciplinas" placeholder="Digite as disciplinas que compõem o curso separadas por vírgula."></textarea>
           </div>
-          <div class="col-12 text-center mt-2">
+          <div class="col-12 text-center mt-1">
             <button type="submit" class="btn btn-secondary mb-5" style="width: fit-content">
               Cadastrar
             </button>

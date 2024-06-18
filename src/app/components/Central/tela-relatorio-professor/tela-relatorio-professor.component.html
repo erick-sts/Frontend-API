@@ -1,8 +1,8 @@
-<div class="container p-1 my-2">
+<div class="container p-1 my-2" style="height: 85vh;">
 
 
     <!--Filtro-->
-    <div class="card mb-2 p-3"  id="filtro">
+    <div class="card mb-2 p-3"  id="filtro" >
         <h5 class="mb-1">Filtrar Professores</h5>
         <main>
             <div id="conteiner" class="p-1">
@@ -54,7 +54,7 @@
 
                     <div id="botoes" class="col-md-3 mb-2 d-flex justify-content-end">
                         <button class="btn btn-primary me-2"
-                            (click)="filtraProfessor(nome.value, this.selectedCursos, this.selectedTitulacoes)">Filtrar</button>
+                            (click)="filtraProfessor(nome.value, this.selectedCursos, this.selectedTitulacoes)">Filtrar 🔍</button>
 
                             <app-botao-imprimir></app-botao-imprimir>
                     </div>
@@ -74,7 +74,7 @@
                     <th scope="col">E-mail</th>
                     <th scope="col">Titulação</th>
                     <th scope="col">Curso</th>
-                    <th scope="col">Código UE</th>
+                    <th scope="col">Código da Unidade</th>
                     <th scope="col" class="colunaOpcoes">Opções</th>
                 </tr>
             </thead>

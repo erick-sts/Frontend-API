@@ -1,10 +1,10 @@
-<main class="container mt-3">
+<main class="container mt-3" style="height: 85vh;">
   <div class="row justify-content-center">
-    <div class="col-lg-10">
+    <div class="card col-lg-10">
       <div class="form-container">
-        <h2 class="text-center mb-2" style="font-weight: bold; font-size: 1.25rem;">
+        <h5 class="text-center mb-1 mt-1">
           Cadastro de Professor<br />Fatec Votorantim
-        </h2>
+        </h5>
         <form class="row g-3" (submit)="professorService.cadastrar($event,
             nome.value,
             matriculaId.value,
@@ -12,7 +12,7 @@
             titulacao.value,
             referencia.value,
             lattes.value,
-            [courseId.value],
+            cursosSelecionados,
             statusAtividade.value,
             email.value,
             notes.value
@@ -35,10 +35,11 @@
               <option value="Especialista">Especialista</option>
               <option value="Mestre">Mestre</option>
               <option value="Doutor">Doutor</option>
+              <option value="Doutor">Pós-Doutorado</option>
             </select>
           </div>
           <div class="col-md-3">
-            <label for="inputNumeroMatricula" class="form-label">Matrícula</label>
+            <label for="inputNumeroMatricula" class="form-label">Número Matrícula</label>
             <input type="number" class="form-control" id="matriculaId" name="inputNumeroMatricula" required
               placeholder="Número da Matrícula" min="0" inputmode="numeric" #matriculaId />
             <!-- <p id="validacaoNome" class="validacao">Somente números são permitidos.</p> -->
@@ -47,7 +48,7 @@
             <label for="inputCodigoUESede" class="form-label">Código UE</label>
             <select id="inputCodigoUESede" class="form-select" required name="inputCodigoUESede" required #unidadeID>
               <option disabled selected>Selecione</option>
-              <option>Votorantim - 301</option>
+              <option>Votorantim301</option>
               <option>Sorocaba - 123</option>
               <option>Tatuí - 900</option>
             </select>
@@ -55,11 +56,11 @@
           <div class="col-md-3">
             <label for="inputCurriculumLates" class="form-label">Lattes (URL)</label>
             <input type="url" class="form-control" id="inputCurriculumLates" name="inputCurriculumLates" required
-              #lattes placeholder="URL do Lattes" />
+              #lattes placeholder="Ex: http:/www.lattes.com.br" />
           </div>
           <div class="col-md-3">
             <label for="inputReferencia" class="form-label">Referência</label>
-            <input type="text" class="form-control" id="inputReferencia" name="inputReferencia" required #referencia />
+            <input type="text" class="form-control" id="inputReferencia" placeholder="Ex: PES I - Grau A" name="inputReferencia" required #referencia />
           </div>
           <div class="col-md-3">
             <label for="inputNotes" class="form-label">Observações</label>
@@ -68,11 +69,12 @@
           </div>
           <div class="col-md-3">
             <label class="form-label">Cursos</label>
-            <select class="form-select" multiple required #courseId>
-              <option disabled selected>Selecione</option>
-              <option class="form-check" *ngFor="let curso of cursos" value="{{curso._id}}">{{curso.nome}}</option>
-            </select>
+            <div class="form-check" *ngFor="let curso of cursos">
+              <input class="form-check-input" type="checkbox" id="{{curso._id}}" [value]="curso._id" (change)="toggleCurso(curso._id)">
+              <label class="form-check-label" for="{{curso._id}}">{{curso.sigla}}</label>
+            </div>
           </div>
+
           <div class="col-md-3">
             <label for="inputstatusAtividade" class="form-label">Ativo?</label>
             <select id="inputstatusAtividade" class="form-select" required name="inputstatusAtividade" required

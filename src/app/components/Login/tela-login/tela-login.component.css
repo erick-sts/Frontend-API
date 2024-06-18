@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Ajuste conforme necessário */
+    height: 100%;
   }
   
   @keyframes spin {
