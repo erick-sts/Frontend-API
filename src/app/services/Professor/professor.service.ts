@@ -102,7 +102,7 @@ export class ProfessorService {
 
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Atualização 🔁';
-        modalRef.componentInstance.mensagem = response.message;
+        modalRef.componentInstance.mensagem = " Atualizado com sucesso!";
         modalRef.componentInstance.mostrarBotoes = false;
         this.router.navigate(["/tela-relatorio-professor"]);
       },

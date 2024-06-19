@@ -24,6 +24,10 @@ export class TelaEditarProfessorComponent implements OnInit {
   professor: any = {}
 
   
+  cursosids: string[] = []
+  
+  
+  
   constructor(private router: Router,private route: ActivatedRoute, protected professorService: ProfessorService, private cursoService: CursosService, private titulo: Title, private utilidadesService: UtilidadesService) { }
 
   
@@ -41,7 +45,15 @@ export class TelaEditarProfessorComponent implements OnInit {
     //Sobreescreve os campos de input com o que o usuário clicou na home
     this.professorService.carregaProfessorPeloNome(nome).subscribe(
       (professor) => {
-        this.professor = professor;
+        this.professor = professor
+
+        //gambiarra para funcionar no back
+        this.cursosids = this.professor.coursesId.map((curso:any) => curso._id)
+        this.professor = {
+          ...this.professor, coursesId:this.cursosids
+        }
+        
+
       },
       (error) => {
         console.error(error);
@@ -49,24 +61,30 @@ export class TelaEditarProfessorComponent implements OnInit {
     
     this.titulo.setTitle(`Editar Professor`)
     this.cursoService.listarCursos(this.cursos);
+
+    
+    
+
+
     
   }
+
+  
 
   toggleCurso(cursoId: string): void {
-    
-    if (this.cursosSelecionados.includes(cursoId)) {
-      this.cursosSelecionados = this.cursosSelecionados.filter(id => id !== cursoId); // Remove o curso selecionado
+    const index = this.professor.coursesId.indexOf(cursoId);
+    if (index === -1) {
+      this.professor.coursesId.push(cursoId); // Adiciona o curso selecionado
     } else {
-      this.cursosSelecionados.push(cursoId); // Adiciona o curso selecionado
-      
+      this.professor.coursesId.splice(index, 1); // Remove o curso selecionado
     }
-    console.log('Cursos selecionados:', this.cursosSelecionados);
+    console.log('Cursos selecionados:', this.professor.coursesId);
   }
+}
+
+  
 
 
-
-
-} 
 
 
 
