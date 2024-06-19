@@ -36,7 +36,7 @@ export class ProfessorService {
     titulacao: string,
     referencia: string,
     lattes: string,
-    courseId: string[],
+    coursesId: string[],
     statusAtividade: string,
     email: string,
     notes: string
@@ -48,7 +48,7 @@ export class ProfessorService {
       titulacao,
       referencia,
       lattes,
-      courseId,
+      coursesId,
       statusAtividade,
       email,
       notes

@@ -49,6 +49,7 @@
                                 </label>
                             </div>
 
+
                         </div>
                     </div>
 
@@ -83,7 +84,7 @@
                     <th scope="row">{{professor.nome}}</th>
                     <td>{{professor.email}}</td>
                     <td>{{professor.titulacao}}</td>
-                    <td *ngFor="let course of professor.coursesId">{{course.sigla}}</td>
+                    <td >{{getCoursesSigla(professor.coursesId)}}</td>
                     <!--Cada professor tem uma lista de cursos, entao é necessário percorrer pela lista de cada curso-->
                     <td>{{professor.unidadeId}}</td>
                     <td class="colunaOpcoes">

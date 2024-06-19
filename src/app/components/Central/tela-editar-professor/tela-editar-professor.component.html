@@ -32,10 +32,9 @@
           <div class="col-md-3">
             <label for="inputCodigoUESede" class="form-label">Código UE</label>
             <select id="inputCodigoUESede" class="form-select" required name="inputCodigoUESede" [(ngModel)]="professor.unidadeId">
-              <option disabled selected>Selecione</option>
-              <option value="301">Votorantim - 301</option>
-              <option value="123">Sorocaba - 123</option>
-              <option value="900">Tatuí - 900</option>
+              <option >301 - Votorantim</option>
+              <option >123 - Sorocaba</option>
+              <option>900 - Tatuí</option>
             </select>
           </div>
           <div class="col-md-3">
@@ -50,13 +49,14 @@
             <label for="inputNotes" class="form-label">Observações</label>
             <input type="text" class="form-control" id="inputNotes" name="inputNotes" [(ngModel)]="professor.notes" placeholder="Observações" />
           </div>
-          <div class="col-md-3">
-            <label class="form-label">Cursos</label>
-            <select class="form-select" multiple required [(ngModel)]="professor.coursesId" name="coursesId">
-              <option disabled selected>Selecione</option>
-              <option class="form-check" *ngFor="let curso of cursos" [value]="curso._id">{{curso.nome}}</option>
-            </select>
-          </div>
+          
+            <div class="col-md-3">
+              <label class="form-label">Cursos</label>
+              <div class="form-check" *ngFor="let curso of cursos">
+                <input class="form-check-input" type="checkbox" id="{{curso._id}}" [value]="curso._id" (change)="toggleCurso(curso._id)">
+                <label class="form-check-label" for="{{curso._id}}">{{curso.sigla}}</label>
+              </div>
+            </div>
           <div class="col-md-3">
             <label for="inputstatusAtividade" class="form-label">Ativo?</label>
             <select id="inputstatusAtividade" class="form-select" required [(ngModel)]="professor.statusAtividade" name="inputstatusAtividade">
