@@ -40,10 +40,12 @@ export class TelaCadastroProfessorComponent implements OnInit {
   cursosSelecionados: string[] = []; // Array para armazenar os cursos selecionados
 
   toggleCurso(cursoId: string): void {
+    
     if (this.cursosSelecionados.includes(cursoId)) {
       this.cursosSelecionados = this.cursosSelecionados.filter(id => id !== cursoId); // Remove o curso selecionado
     } else {
       this.cursosSelecionados.push(cursoId); // Adiciona o curso selecionado
+
     }
     console.log('Cursos selecionados:', this.cursosSelecionados);
   }

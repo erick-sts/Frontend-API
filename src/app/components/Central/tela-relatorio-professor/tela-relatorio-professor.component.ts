@@ -81,7 +81,7 @@ export class TelaRelatorioProfessorComponent implements OnInit {
         this.professores = this.professores.filter((p) => p !== professor);
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = '🗑️';
-        modalRef.componentInstance.mensagem = response.message;
+        modalRef.componentInstance.mensagem = response.message + " Professor excluído com sucesso!";
         modalRef.componentInstance.mostrarBotoes = false;
 
       },
@@ -120,5 +120,9 @@ export class TelaRelatorioProfessorComponent implements OnInit {
 
     this.professorService.listarProfessores(this.professores)
     
+  }
+
+  getCoursesSigla(coursesId: any[]): string {
+    return coursesId.map(course => course.sigla).join(', ');
   }
 }

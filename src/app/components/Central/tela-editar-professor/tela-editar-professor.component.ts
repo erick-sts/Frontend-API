@@ -37,7 +37,7 @@ export class TelaEditarProfessorComponent implements OnInit {
     
     
     const nome = this.route.snapshot.paramMap.get('nome') ?? '';
-
+    
     //Sobreescreve os campos de input com o que o usuário clicou na home
     this.professorService.carregaProfessorPeloNome(nome).subscribe(
       (professor) => {
@@ -49,9 +49,20 @@ export class TelaEditarProfessorComponent implements OnInit {
     
     this.titulo.setTitle(`Editar Professor`)
     this.cursoService.listarCursos(this.cursos);
+    
   }
 
-  
+  toggleCurso(cursoId: string): void {
+    
+    if (this.cursosSelecionados.includes(cursoId)) {
+      this.cursosSelecionados = this.cursosSelecionados.filter(id => id !== cursoId); // Remove o curso selecionado
+    } else {
+      this.cursosSelecionados.push(cursoId); // Adiciona o curso selecionado
+      
+
+    }
+    console.log('Cursos selecionados:', this.cursosSelecionados);
+  }
 
 
 
