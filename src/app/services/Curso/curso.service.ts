@@ -40,37 +40,45 @@ export class CursosService {
     sigla: String,
     modalidade: String,
     professors: Object,
-    coordenador: String) {
-
+    coordenador: String
+  ) {
     const novoCurso = {
       nome,
       codCourse,
       disciplinas,
       sigla,
       modalidade,
+      professors,
       coordenador
-    }
-
+    };
+  
     const headers = this.getAuthHeaders();
-
-    this.http.post<HttpResponse>(`${this.baseUrl}/course/`, novoCurso, { headers }).subscribe({
+    
+    this.http.post<any>(`${this.baseUrl}/course/`, novoCurso, { headers }).subscribe({
       next: (response) => {
-        console.log(response)
+        console.log(response);
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Cadastro de Curso 📝';
         modalRef.componentInstance.mensagem = response.message;
         modalRef.componentInstance.mostrarBotoes = false;
-       this.router.navigate(["/home"])
+        this.router.navigate(['/home']);
       },
-      error: (error) => {
-        console.error(error);
-
+      error: (err) => {
+        console.error('Erro ao cadastrar Curso:', err);
+        let errorMessage = 'Erro desconhecido';
+  
+        if (err.error && err.error.err) {
+          errorMessage = err.error.err.map((error: any) => error.msg).join('<br><br>');
+        } else if (err.error && typeof err.error === 'string') {
+          errorMessage = err.error;
+        }
+  
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Cadastro de Curso 📝';
-        modalRef.componentInstance.mensagem = 'Erro ao cadastrar Curso!';
+        modalRef.componentInstance.mensagem = errorMessage || 'Erro ao cadastrar Curso.';
         modalRef.componentInstance.mostrarBotoes = false;
       }
-    })
+    });
   }
 
   //Read 📖

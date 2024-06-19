@@ -37,9 +37,14 @@
                           </select>
                       </div>
                       <div class="col-md-4">
-                          <label for="inputCoordenador" class="form-label">Coordenador</label>
-                          <input type="text" class="form-control" name="inputCoordenadorCurso" id="inputCoordenadorCurso" #coordenador placeholder="Nome do coordenador">
-                      </div>
+                        <label for="inputCoordenador" class="form-label">Coordenador</label>
+                        <select class="form-select" name="inputCoordenadorCurso" id="inputCoordenadorCurso"
+                            #coordenador>
+                            <option selected disabled>Selecione</option>
+                            <option *ngFor="let professor of professores" value="{{professor.id}}">{{professor.nome}}
+                            </option>
+                        </select>
+                    </div>
                       <div class="col-md-12">
                           <label for="inputDisciplinas" class="form-label">Disciplinas</label>
                           <textarea type="text" class="form-control" id="inputDisciplinasCurso" #disciplinas name="inputDisciplinas" placeholder="Digite as disciplinas que compõem o curso separadas por vírgula."></textarea>
