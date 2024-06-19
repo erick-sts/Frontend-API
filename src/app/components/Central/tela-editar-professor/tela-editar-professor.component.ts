@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { UtilidadesService } from '../../../services/Utilidades/utilidades.service';
 import { FormsModule } from '@angular/forms';
-import { switchMap } from 'rxjs';
+import { ObservableInput, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-tela-editar-professor',
@@ -24,7 +24,7 @@ export class TelaEditarProfessorComponent implements OnInit {
   cursosSelecionados: any[] = []
   professor: any = {}
 
-  
+  retornoObservavel: ObservableInput<any> = ""
   cursosids: string[] = []
   
   
@@ -55,7 +55,9 @@ export class TelaEditarProfessorComponent implements OnInit {
             this.titulo.setTitle(`Editar Professor ${this.professor.nome}`);
             
             // Retorna um Observable de listagem de cursos
-            return this.cursoService.listarCursos();
+             this.cursoService.listarCursos(this.cursos);
+
+             return this.retornoObservavel;
         })
     ).subscribe(
         (cursos) => {

@@ -98,30 +98,22 @@ export class CursosService {
 
   // ❗Métodos que usarão o crud porém trabalhando de forma específica. ❗
 
-  listarCursos(): Observable<any[]> {
-    return this.listar().pipe(
-        catchError(error => {
-            // Trate erros, se necessário
-            console.error('Erro ao listar cursos:', error);
-            throw error; // Reenvia o erro para quem chama
-        })
-    );
-}
+
 
 
 //Versão Antiga...
-// listarCursos(cursos: any[]) {
-//   this.listar().subscribe(
-//     (cursosCadastrados) => {
-//       cursos.splice(0, cursos.length, ...cursosCadastrados)
-//       //Splice está formatando a variável professores para poder receber os professores cadastrados vindo do banco de dados.
+listarCursos(cursos: any[]) {
+  this.listar().subscribe(
+    (cursosCadastrados) => {
+      cursos.splice(0, cursos.length, ...cursosCadastrados)
+      //Splice está formatando a variável professores para poder receber os professores cadastrados vindo do banco de dados.
 
-//     },
-//     (error) => {
-//       alert(`Erro ao listar cursos: ${error.message}`);
-//     }
-//   )
-// }
+    },
+    (error) => {
+      alert(`Erro ao listar cursos: ${error.message}`);
+    }
+  )
+}
 
 
 
