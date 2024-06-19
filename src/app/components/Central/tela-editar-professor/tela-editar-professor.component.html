@@ -1,55 +1,53 @@
-<main class="container mt-3" style="height: 85vh;">
-  <div class="row justify-content-center">
-    <div class="card col-lg-10">
-      <div class="form-container">
-        <h2 class="text-center mb-2" style="font-weight: bold; font-size: 1.25rem;">
-          Edição de Professor<br />Fatec Votorantim
-        </h2>
-        <form class="row g-3" (submit)="professorService.atualizar(professor._id, professor)">
-          <div class="col-md-3">
-            <label for="inputNome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="inputNome" name="inputNome" [(ngModel)]="professor.nome" required />
-            <!-- <p id="validacaoNome" class="validacao">Somente letras são permitidas.</p> -->
-          </div>
-          <div class="col-md-3">
-            <label for="inputEmail" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="inputEmail" name="inputEmail" [(ngModel)]="professor.email" required />
-          </div>
-          <div class="col-md-3">
-            <label for="inputTitulacao" class="form-label">Titulação</label>
-            <select id="inputTitulacao" class="form-select" [(ngModel)]="professor.titulacao" required name="inputTitulacao">
-              <option disabled>Selecione</option>
-              <option value="Especialista">Especialista</option>
-              <option value="Mestre">Mestre</option>
-              <option value="Doutor">Doutor</option>
-            </select>
-          </div>
-          <div class="col-md-3">
-            <label for="inputNumeroMatricula" class="form-label">Matrícula</label>
-            <input type="number" class="form-control" id="inputNumeroMatricula" name="inputNumeroMatricula" [(ngModel)]="professor.matriculaId" disabled />
-            <!-- <p id="validacaoNome" class="validacao">Somente números são permitidos.</p> -->
-          </div>
-          <div class="col-md-3">
-            <label for="inputCodigoUESede" class="form-label">Código UE</label>
-            <select id="inputCodigoUESede" class="form-select" required name="inputCodigoUESede" [(ngModel)]="professor.unidadeId">
-              <option >301 - Votorantim</option>
-              <option >123 - Sorocaba</option>
-              <option>900 - Tatuí</option>
-            </select>
-          </div>
-          <div class="col-md-3">
-            <label for="inputCurriculumLates" class="form-label">Lattes (URL)</label>
-            <input type="url" class="form-control" id="inputCurriculumLates" name="inputCurriculumLates" [(ngModel)]="professor.lattes" />
-          </div>
-          <div class="col-md-3">
-            <label for="inputReferencia" class="form-label">Referência</label>
-            <input type="text" class="form-control" id="inputReferencia" name="inputReferencia" [(ngModel)]="professor.referencia" />
-          </div>
-          <div class="col-md-3">
-            <label for="inputNotes" class="form-label">Observações</label>
-            <input type="text" class="form-control" id="inputNotes" name="inputNotes" [(ngModel)]="professor.notes" placeholder="Observações" />
-          </div>
-          
+<main class="d-flex align-items-center justify-content-center" style="height: 85vh;">
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="card col-12 col-lg-10">
+        <div class="form-container p-4">
+          <h2 class="text-center mb-2" style="font-weight: bold; font-size: 1.25rem;">
+            Edição de Professor<br />Fatec Votorantim
+          </h2>
+          <form class="row g-3" (submit)="professorService.atualizar(professor._id, professor)">
+            <div class="col-md-3">
+              <label for="inputNome" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="inputNome" name="inputNome" [(ngModel)]="professor.nome" required />
+            </div>
+            <div class="col-md-3">
+              <label for="inputEmail" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="inputEmail" name="inputEmail" [(ngModel)]="professor.email" required />
+            </div>
+            <div class="col-md-3">
+              <label for="inputTitulacao" class="form-label">Titulação</label>
+              <select id="inputTitulacao" class="form-select" [(ngModel)]="professor.titulacao" required name="inputTitulacao">
+                <option disabled>Selecione</option>
+                <option value="Especialista">Especialista</option>
+                <option value="Mestre">Mestre</option>
+                <option value="Doutor">Doutor</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="inputNumeroMatricula" class="form-label">Matrícula</label>
+              <input type="number" class="form-control" id="inputNumeroMatricula" name="inputNumeroMatricula" [(ngModel)]="professor.matriculaId" disabled />
+            </div>
+            <div class="col-md-3">
+              <label for="inputCodigoUESede" class="form-label">Código UE</label>
+              <select id="inputCodigoUESede" class="form-select" required name="inputCodigoUESede" [(ngModel)]="professor.unidadeId">
+                <option>301 - Votorantim</option>
+                <option>123 - Sorocaba</option>
+                <option>900 - Tatuí</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="inputCurriculumLates" class="form-label">Lattes (URL)</label>
+              <input type="url" class="form-control" id="inputCurriculumLates" name="inputCurriculumLates" [(ngModel)]="professor.lattes" />
+            </div>
+            <div class="col-md-3">
+              <label for="inputReferencia" class="form-label">Referência</label>
+              <input type="text" class="form-control" id="inputReferencia" name="inputReferencia" [(ngModel)]="professor.referencia" />
+            </div>
+            <div class="col-md-3">
+              <label for="inputNotes" class="form-label">Observações</label>
+              <input type="text" class="form-control" id="inputNotes" name="inputNotes" [(ngModel)]="professor.notes" placeholder="Observações" />
+            </div>
             <div class="col-md-3">
               <label class="form-label">Cursos</label>
               <div class="form-check" *ngFor="let curso of cursos">
@@ -57,19 +55,20 @@
                 <label class="form-check-label" for="{{curso._id}}">{{curso.sigla}}</label>
               </div>
             </div>
-          <div class="col-md-3">
-            <label for="inputstatusAtividade" class="form-label">Ativo?</label>
-            <select id="inputstatusAtividade" class="form-select" required [(ngModel)]="professor.statusAtividade" name="inputstatusAtividade">
-              <option selected>Ativo</option>
-              <option>Desativado</option>
-            </select>
-          </div>
-          <div class="col-12 text-center mt-2 mb-5">
-            <button type="submit" class="btn btn-secondary" style="width: 15%">
-              Salvar
-            </button>
-          </div>
-        </form>
+            <div class="col-md-3">
+              <label for="inputstatusAtividade" class="form-label">Ativo?</label>
+              <select id="inputstatusAtividade" class="form-select" required [(ngModel)]="professor.statusAtividade" name="inputstatusAtividade">
+                <option selected>Ativo</option>
+                <option>Desativado</option>
+              </select>
+            </div>
+            <div class="col-12 text-center mt-2 mb-5">
+              <button type="submit" class="btn btn-secondary" style="width: 15%">
+                Salvar
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

@@ -59,7 +59,6 @@ export class TelaEditarProfessorComponent implements OnInit {
     } else {
       this.cursosSelecionados.push(cursoId); // Adiciona o curso selecionado
       
-
     }
     console.log('Cursos selecionados:', this.cursosSelecionados);
   }

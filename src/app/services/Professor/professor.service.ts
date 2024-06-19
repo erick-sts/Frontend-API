@@ -53,7 +53,7 @@ export class ProfessorService {
       email,
       notes
     };
-  
+
     const headers = this.getAuthHeaders();
     event.preventDefault();
     this.http
@@ -70,13 +70,13 @@ export class ProfessorService {
         error: (err) => {
           console.error('Erro ao cadastrar Professor:', err);
           let errorMessage = 'Erro desconhecido';
-  
+
           if (err.error && err.error.err) {
             errorMessage = err.error.err.map((error: any) => error.msg).join('<br><br>');
           } else if (err.error && typeof err.error === 'string') {
             errorMessage = err.error;
           }
-  
+
           const modalRef = this.modalService.open(AlertaComponent, { centered: true });
           modalRef.componentInstance.acao = 'Cadastro de Professor 📝';
           modalRef.componentInstance.mensagem = errorMessage || 'Erro ao cadastrar professor.';
@@ -91,9 +91,11 @@ export class ProfessorService {
     return this.http.get<any[]>(`${this.baseUrl}/professors/`, { headers });
   }
 
-  //Update 🔁
+  // Update 🔁
   atualizar(id: string, professorAtualizado: any) {
     const headers = this.getAuthHeaders();
+    console.log(professorAtualizado)
+    console.log(id)
     return this.http.put<any>(`${this.baseUrl}/professors/${id}`, professorAtualizado, { headers }).subscribe({
       next: (response) => {
         console.log('Resposta da atualização:', response);
@@ -102,16 +104,25 @@ export class ProfessorService {
         modalRef.componentInstance.acao = 'Atualização 🔁';
         modalRef.componentInstance.mensagem = response.message;
         modalRef.componentInstance.mostrarBotoes = false;
-        this.router.navigate(["/tela-relatorio-professor"])
+        this.router.navigate(["/tela-relatorio-professor"]);
       },
       error: (error) => {
         console.error('Erro ao atualizar Professor:', error);
+
+        let errorMessage = 'Erro desconhecido';
+
+        if (error.error && error.error.err) {
+          errorMessage = error.error.err.map((err: any) => err.msg).join('<br><br>');
+        } else if (error.error && typeof error.error === 'string') {
+          errorMessage = error.error;
+        }
+
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Atualização 🔁';
-        modalRef.componentInstance.mensagem = error.message;
+        modalRef.componentInstance.mensagem = errorMessage || 'Erro ao atualizar professor.';
         modalRef.componentInstance.mostrarBotoes = false;
       }
-    })
+    });
   }
 
   //Delete 🗑️
