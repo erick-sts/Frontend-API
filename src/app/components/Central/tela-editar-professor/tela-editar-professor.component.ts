@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { UtilidadesService } from '../../../services/Utilidades/utilidades.service';
 import { FormsModule } from '@angular/forms';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-tela-editar-professor',
@@ -36,38 +37,73 @@ export class TelaEditarProfessorComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
-    
-    
     const nome = this.route.snapshot.paramMap.get('nome') ?? '';
-    
-    //Sobreescreve os campos de input com o que o usuário clicou na home
-    this.professorService.carregaProfessorPeloNome(nome).subscribe(
-      (professor) => {
-        this.professor = professor
 
-        //gambiarra para funcionar no back
-        this.cursosids = this.professor.coursesId.map((curso:any) => curso._id)
-        this.professor = {
-          ...this.professor, coursesId:this.cursosids
+    // Carrega o professor pelo nome e encadeia com a listagem de cursos
+    this.professorService.carregaProfessorPeloNome(nome).pipe(
+        switchMap((professor) => {
+            this.professor = professor;
+            
+            // Mapeia os IDs dos cursos para uso posterior
+            this.cursosids = this.professor.coursesId.map((curso: any) => curso._id);
+            
+            // Atualiza o professor com os IDs dos cursos
+            this.professor.coursesId = this.cursosids;
+            
+            // Configura o título da página
+            this.titulo.setTitle(`Editar Professor ${this.professor.nome}`);
+            
+            // Retorna um Observable de listagem de cursos
+            return this.cursoService.listarCursos();
+        })
+    ).subscribe(
+        (cursos) => {
+            this.cursos = cursos;
+        },
+        (error) => {
+            console.error('Erro ao carregar cursos:', error);
         }
-        
-
-      },
-      (error) => {
-        console.error(error);
-      })
-    
-    this.titulo.setTitle(`Editar Professor`)
-    this.cursoService.listarCursos(this.cursos);
-
-    
-    
+    );
+}
 
 
+//Método antigo...
+// ngOnInit(): void {
     
-  }
+    
+//   const nome = this.route.snapshot.paramMap.get('nome') ?? '';
+  
+//   //Sobreescreve os campos de input com o que o usuário clicou na home
+//   this.professorService.carregaProfessorPeloNome(nome).subscribe(
+//     (professor) => {
+//       this.professor = professor
+
+//       //gambiarra para funcionar no back
+//       this.cursosids = this.professor.coursesId.map((curso:any) => curso._id)
+//       this.professor = {
+//         ...this.professor, coursesId:this.cursosids
+//       }
+      
+
+//     },
+//     (error) => {
+//       console.error(error);
+//     })
+  
+//   this.titulo.setTitle(`Editar Professor`)
+//   this.cursoService.listarCursos(this.cursos);
+
+  
+  
+
+
+  
+// }
+
+
+
+
 
   
 
