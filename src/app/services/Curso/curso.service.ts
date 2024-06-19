@@ -60,7 +60,7 @@ export class CursosService {
         modalRef.componentInstance.acao = 'Cadastro de Curso 📝';
         modalRef.componentInstance.mensagem = response.msg;
         modalRef.componentInstance.mostrarBotoes = false;
-        this.router.navigate(['/home']);
+        this.router.navigate(['/tela-relatorio-curso']);
       },
       error: (err) => {
         console.error('Erro ao cadastrar Curso:', err);

@@ -65,7 +65,7 @@ export class ProfessorService {
           modalRef.componentInstance.acao = 'Cadastro de Professor 📝';
           modalRef.componentInstance.mensagem = response.message;
           modalRef.componentInstance.mostrarBotoes = false;
-          this.router.navigate(['/home']);
+          this.router.navigate(['/tela-relatorio-professor']);
         },
         error: (err) => {
           console.error('Erro ao cadastrar Professor:', err);
