@@ -92,10 +92,34 @@ export class ProfessorService {
   }
 
   // Update 🔁
-  atualizar(id: string, professorAtualizado: any) {
-    const headers = this.getAuthHeaders();
+  atualizar(
+    id: string,
+    nome: string,
+    matriculaId: string,
+    unidadeId: string,
+    titulacao: string,
+    referencia: string,
+    lattes: string,
+    coursesId: string[],
+    statusAtividade: string,
+    email: string,
+    notes: string
+  ) {
+    const professorAtualizado = {
+      nome,
+      matriculaId,
+      unidadeId,
+      titulacao,
+      referencia,
+      lattes,
+      coursesId,
+      statusAtividade,
+      email,
+      notes
+    };
+    console.log(coursesId)
     console.log(professorAtualizado)
-    console.log(id)
+    const headers = this.getAuthHeaders();
     return this.http.put<any>(`${this.baseUrl}/professors/${id}`, professorAtualizado, { headers }).subscribe({
       next: (response) => {
         console.log('Resposta da atualização:', response);

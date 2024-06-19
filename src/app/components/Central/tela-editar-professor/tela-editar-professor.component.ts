@@ -26,71 +26,79 @@ export class TelaEditarProfessorComponent implements OnInit {
 
   retornoObservavel: ObservableInput<any> = ""
   cursosids: string[] = []
-  
-  
-  
-  constructor(private router: Router,private route: ActivatedRoute, protected professorService: ProfessorService, private cursoService: CursosService, private titulo: Title, private utilidadesService: UtilidadesService) { }
 
-  
+
+
+  constructor(private router: Router, private route: ActivatedRoute, protected professorService: ProfessorService, private cursoService: CursosService, private titulo: Title, private utilidadesService: UtilidadesService) { }
+
+
   ngAfterViewInit(): void {
     this.utilidadesService.somenteLetrasInput(this.nome)
   }
 
+  //Método antigo...
+  ngOnInit(): void {
 
 
+    const nome = this.route.snapshot.paramMap.get('nome') ?? '';
+
+    // Carrega dados do professor
+    this.professorService.carregaProfessorPeloNome(nome).subscribe(
+      (professor) => {
+        this.professor = professor;
+
+        // Inicializa cursosSelecionados com os IDs dos cursos associados ao professor
+        this.cursosSelecionados = this.professor.coursesId.map((curso: any) => curso._id);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+    // Define o título da página
+    this.titulo.setTitle(`Editar Professor`);
+
+    // Carrega a lista de cursos
+    this.cursoService.listar().subscribe(
+      (cursos) => {
+        this.cursos = cursos;
+      },
+      (error) => {
+        console.error('Erro ao carregar cursos:', error);
+      }
+    );
+  }
 
 
-//Método antigo...
- ngOnInit(): void {
-    
-    
-   const nome = this.route.snapshot.paramMap.get('nome') ?? '';
-  
-   //Sobreescreve os campos de input com o que o usuário clicou na home
-   this.professorService.carregaProfessorPeloNome(nome).subscribe(
-     (professor) => {
-       this.professor = professor
-
-       //gambiarra para funcionar no back
-       this.cursosids = this.professor.coursesId.map((curso:any) => curso._id)
-       this.professor = {
-         ...this.professor, coursesId:this.cursosids
-       }
-      
-
-     },
-     (error) => {
-       console.error(error);
-     })
-  
-   this.titulo.setTitle(`Editar Professor`)
-   this.cursoService.listarCursos(this.cursos);
-
-  
-  
-
-
-  
- }
-
-
-
-
-
-  
+  atualizarProfessor(): void {
+    this.professorService.atualizar(
+      this.professor._id,
+      this.professor.nome,
+      this.professor.matriculaId,
+      this.professor.unidadeId,
+      this.professor.titulacao,
+      this.professor.referencia,
+      this.professor.lattes,
+      this.cursosSelecionados,
+      this.professor.statusAtividade,
+      this.professor.email,
+      this.professor.notes
+    );
+  }
 
   toggleCurso(cursoId: string): void {
-    const index = this.professor.coursesId.indexOf(cursoId);
-    if (index === -1) {
-      this.professor.coursesId.push(cursoId); // Adiciona o curso selecionado
+
+    if (this.cursosSelecionados.includes(cursoId)) {
+      this.cursosSelecionados = this.cursosSelecionados.filter(id => id !== cursoId); // Remove o curso selecionado
     } else {
-      this.professor.coursesId.splice(index, 1); // Remove o curso selecionado
+      this.cursosSelecionados.push(cursoId); // Adiciona o curso selecionado
+
     }
-    console.log('Cursos selecionados:', this.professor.coursesId);
+    console.log('Cursos selecionados:', this.cursosSelecionados);
   }
 }
 
-  
+
 
 
 
