@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { UtilidadesService } from '../../../services/Utilidades/utilidades.service';
 import { FormsModule } from '@angular/forms';
+import { ObservableInput, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-tela-editar-professor',
@@ -23,7 +24,7 @@ export class TelaEditarProfessorComponent implements OnInit {
   cursosSelecionados: any[] = []
   professor: any = {}
 
-  
+  retornoObservavel: ObservableInput<any> = ""
   cursosids: string[] = []
   
   
@@ -37,37 +38,44 @@ export class TelaEditarProfessorComponent implements OnInit {
 
 
 
-  ngOnInit(): void {
-    
-    
-    const nome = this.route.snapshot.paramMap.get('nome') ?? '';
-    
-    //Sobreescreve os campos de input com o que o usuário clicou na home
-    this.professorService.carregaProfessorPeloNome(nome).subscribe(
-      (professor) => {
-        this.professor = professor
-
-        //gambiarra para funcionar no back
-        this.cursosids = this.professor.coursesId.map((curso:any) => curso._id)
-        this.professor = {
-          ...this.professor, coursesId:this.cursosids
-        }
-        
-
-      },
-      (error) => {
-        console.error(error);
-      })
-    
-    this.titulo.setTitle(`Editar Professor`)
-    this.cursoService.listarCursos(this.cursos);
-
-    
-    
 
 
+//Método antigo...
+ ngOnInit(): void {
     
-  }
+    
+   const nome = this.route.snapshot.paramMap.get('nome') ?? '';
+  
+   //Sobreescreve os campos de input com o que o usuário clicou na home
+   this.professorService.carregaProfessorPeloNome(nome).subscribe(
+     (professor) => {
+       this.professor = professor
+
+       //gambiarra para funcionar no back
+       this.cursosids = this.professor.coursesId.map((curso:any) => curso._id)
+       this.professor = {
+         ...this.professor, coursesId:this.cursosids
+       }
+      
+
+     },
+     (error) => {
+       console.error(error);
+     })
+  
+   this.titulo.setTitle(`Editar Professor`)
+   this.cursoService.listarCursos(this.cursos);
+
+  
+  
+
+
+  
+ }
+
+
+
+
 
   
 

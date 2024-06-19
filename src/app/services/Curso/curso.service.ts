@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { Route, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertaComponent } from '../../components/ComponentesVisuais/alerta/alerta.component';
@@ -106,18 +106,22 @@ export class CursosService {
 
   // ❗Métodos que usarão o crud porém trabalhando de forma específica. ❗
 
-  listarCursos(cursos: any[]) {
-    this.listar().subscribe(
-      (cursosCadastrados) => {
-        cursos.splice(0, cursos.length, ...cursosCadastrados)
-        //Splice está formatando a variável professores para poder receber os professores cadastrados vindo do banco de dados.
 
-      },
-      (error) => {
-        alert(`Erro ao listar cursos: ${error.message}`);
-      }
-    )
-  }
+
+
+//Versão Antiga...
+listarCursos(cursos: any[]) {
+  this.listar().subscribe(
+    (cursosCadastrados) => {
+      cursos.splice(0, cursos.length, ...cursosCadastrados)
+      //Splice está formatando a variável professores para poder receber os professores cadastrados vindo do banco de dados.
+
+    },
+    (error) => {
+      alert(`Erro ao listar cursos: ${error.message}`);
+    }
+  )
+}
 
 
 

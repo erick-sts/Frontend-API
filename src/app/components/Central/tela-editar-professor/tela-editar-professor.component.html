@@ -51,11 +51,11 @@
             <div class="col-md-3">
               <label class="form-label">Cursos</label>
               <div class="form-check" *ngFor="let curso of cursos">
-                <input class="form-check-input" type="checkbox" id="{{curso._id}}" [value]="curso._id" (change)="toggleCurso(curso._id)" [checked]="this.professor.coursesId.includes(curso._id)"  [(ngModel)]="professor.coursesId">
+                <input class="form-check-input" type="checkbox" id="{{curso._id}}" [value]="curso._id" (change)="toggleCurso(curso._id)" [checked]="this.cursosids.includes(curso._id)"  [(ngModel)]="professor.coursesId">
                 <label class="form-check-label" for="{{curso._id}}">{{curso.sigla}}</label>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3">  
               <label for="inputstatusAtividade" class="form-label">Ativo?</label>
               <select id="inputstatusAtividade" class="form-select" required [(ngModel)]="professor.statusAtividade" name="inputstatusAtividade">
                 <option selected>Ativo</option>
