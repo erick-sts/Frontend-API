@@ -17,15 +17,22 @@ A ideia para o desenvolvimento do projeto surgiu da necessidade de se adequar ao
  
 > _Projeto baseado na metodologia ágil SCRUM, procurando desenvolver a Proatividade, Autonomia, Colaboração e Entrega de Resultados dos estudantes envolvidos_
  
-:pushpin: Status do Projeto: **Em Andamento**
+:pushpin: Status do Projeto: **Finalizado**
  
 ### 🏁 Entregas de Sprints
 Cada sprint no desenvolvimento ágil resulta em uma entrega funcional e incremental do sistema. Essas entregas são versões do produto que incluem novas funcionalidades implementadas e testadas, prontas para serem demonstradas e, potencialmente, utilizadas. Observe a relação a seguir:
 | Sprint | Previsão | Status | Histórico |
 |:--:|:----------:|:----------------|:-------------------------------------------------:|
-| 01 | 06/05/2024 | ✔️ Concluída    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint1/README.md) |
-| 02 | 15/05/2024 | ✔️ Concluída    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint2/README.md) |
-| 03 | 11/06/2024 | ⏳  Em andamento    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint3/README.md) |
+| 01 | 15/03/2024 | ✔️ Concluída    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint1/README.md) |
+| 02 | 13/04/2024 | ✔️ Concluída    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint2/README.md) |
+| 03 | 12/05/2024 | ✔️ Concluída    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint3/README.md) |
+
+<details>
+   <summary>Linha do Tempo Sprints</summary>
+    <div align="center">
+        <img src="https://github.com/VitorRuan/Sprints/blob/main/Imagens/Jira%20-%20Linha%20do%20tempo.png">
+    </div>
+</details>
  
 <span id="backlogs">
  
