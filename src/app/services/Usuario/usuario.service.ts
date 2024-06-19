@@ -9,6 +9,7 @@ interface AuthResponse {
   message?: string;
   token?: string;
   err?: string;
+  msg?: string;
 }
 
 @Injectable({
@@ -29,7 +30,7 @@ export class UsuarioService {
       next: (response) => {
         console.log('Resposta da atualização:', response);
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
-        modalRef.componentInstance.mensagem = response.message; // Exibir mensagem de sucesso
+        modalRef.componentInstance.mensagem = response.msg; // Exibir mensagem de sucesso
         modalRef.componentInstance.mostrarBotoes = false;
         this.router.navigate(["/tela-login"]);
       },

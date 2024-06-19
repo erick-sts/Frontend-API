@@ -9,3 +9,25 @@
 
     }
 }
+
+.custom-toggler {
+    border: none;
+    /* Remove a borda padrão */
+    outline: none;
+    /* Remove o outline padrão */
+    padding: 0.25rem 0.75rem;
+    /* Ajuste o padding conforme necessário */
+    background-color: transparent;
+    /* Fundo transparente */
+}
+
+/* Define o estilo de hover do botão */
+.custom-toggler:hover {
+    background-color: #ddd;
+    /* Cor de fundo ao passar o mouse */
+}
+
+.custom-toggler:focus {
+    box-shadow: none;
+    /* Remove o box-shadow ao focar */
+}

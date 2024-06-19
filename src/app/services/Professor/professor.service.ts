@@ -117,8 +117,6 @@ export class ProfessorService {
       email,
       notes
     };
-    console.log(coursesId)
-    console.log(professorAtualizado)
     const headers = this.getAuthHeaders();
     return this.http.put<any>(`${this.baseUrl}/professors/${id}`, professorAtualizado, { headers }).subscribe({
       next: (response) => {
@@ -154,9 +152,6 @@ export class ProfessorService {
     const headers = this.getAuthHeaders();
     return this.http.delete<any>(`${this.baseUrl}/professors/${matriculaId}`, { headers });
   }
-
-
-
 
   // ❗Métodos que usarão o crud porém trabalhando de forma específica. ❗
 

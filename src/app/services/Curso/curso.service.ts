@@ -7,7 +7,7 @@ import { AlertaComponent } from '../../components/ComponentesVisuais/alerta/aler
 
 interface HttpResponse {
   message: string;
- 
+
 }
 
 @Injectable({
@@ -34,13 +34,13 @@ export class CursosService {
 
   //Create 🆕
   cadastrar(
-    nome: String,
-    codCourse: String,
-    disciplinas: [String],
-    sigla: String,
-    modalidade: String,
-    professors: Object,
-    coordenador: String
+    nome: string,
+    codCourse: string,
+    disciplinas: string[],
+    sigla: string,
+    modalidade: string,
+    professores: any[],
+    coordenador: string
   ) {
     const novoCurso = {
       nome,
@@ -48,31 +48,30 @@ export class CursosService {
       disciplinas,
       sigla,
       modalidade,
-      professors,
+      professores,
       coordenador
     };
-  
+    console.log(novoCurso)
     const headers = this.getAuthHeaders();
-    
     this.http.post<any>(`${this.baseUrl}/course/`, novoCurso, { headers }).subscribe({
       next: (response) => {
         console.log(response);
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Cadastro de Curso 📝';
-        modalRef.componentInstance.mensagem = response.message;
+        modalRef.componentInstance.mensagem = response.msg;
         modalRef.componentInstance.mostrarBotoes = false;
         this.router.navigate(['/home']);
       },
       error: (err) => {
         console.error('Erro ao cadastrar Curso:', err);
         let errorMessage = 'Erro desconhecido';
-  
+
         if (err.error && err.error.err) {
           errorMessage = err.error.err.map((error: any) => error.msg).join('<br><br>');
         } else if (err.error && typeof err.error === 'string') {
           errorMessage = err.error;
         }
-  
+
         const modalRef = this.modalService.open(AlertaComponent, { centered: true });
         modalRef.componentInstance.acao = 'Cadastro de Curso 📝';
         modalRef.componentInstance.mensagem = errorMessage || 'Erro ao cadastrar Curso.';
@@ -81,10 +80,11 @@ export class CursosService {
     });
   }
 
+
   //Read 📖
   listar() {
     const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(`${this.baseUrl}/course/`, {headers});
+    return this.http.get<any[]>(`${this.baseUrl}/course/`, { headers });
   }
 
   //Update 🔁
@@ -93,7 +93,7 @@ export class CursosService {
   //Delete 🗑️
   deletar(id: string) {
     const headers = this.getAuthHeaders();
-    return this.http.delete<any>(`${this.baseUrl}/course/${id}`, {headers})
+    return this.http.delete<any>(`${this.baseUrl}/course/${id}`, { headers })
   }
   // ###
 
@@ -109,19 +109,19 @@ export class CursosService {
 
 
 
-//Versão Antiga...
-listarCursos(cursos: any[]) {
-  this.listar().subscribe(
-    (cursosCadastrados) => {
-      cursos.splice(0, cursos.length, ...cursosCadastrados)
-      //Splice está formatando a variável professores para poder receber os professores cadastrados vindo do banco de dados.
+  //Versão Antiga...
+  listarCursos(cursos: any[]) {
+    this.listar().subscribe(
+      (cursosCadastrados) => {
+        cursos.splice(0, cursos.length, ...cursosCadastrados)
+        //Splice está formatando a variável professores para poder receber os professores cadastrados vindo do banco de dados.
 
-    },
-    (error) => {
-      alert(`Erro ao listar cursos: ${error.message}`);
-    }
-  )
-}
+      },
+      (error) => {
+        alert(`Erro ao listar cursos: ${error.message}`);
+      }
+    )
+  }
 
 
 

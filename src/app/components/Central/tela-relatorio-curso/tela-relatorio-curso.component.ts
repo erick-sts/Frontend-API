@@ -26,6 +26,7 @@ export class TelaRelatorioCursoComponent implements OnInit {
   ngOnInit(): void {
     this.cursoService.listarCursos(this.cursos);
     this.titulo.setTitle("Relatório de Cursos")
+    console.log(this.cursos)
   }
 
 
