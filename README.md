@@ -26,6 +26,13 @@ Cada sprint no desenvolvimento ágil resulta em uma entrega funcional e incremen
 | 01 | 15/03/2024 | ✔️ Concluída    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint1/README.md) |
 | 02 | 13/04/2024 | ✔️ Concluída    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint2/README.md) |
 | 03 | 12/05/2024 | ✔️ Concluída    | [ver relatório](https://github.com/VitorRuan/Sprints/blob/Sprint3/README.md) |
+
+<details>
+   <summary>Linha do Tempo Sprints</summary>
+    <div align="center">
+        <img src="https://github.com/VitorRuan/Sprints/blob/main/Imagens/Jira%20-%20Linha%20do%20tempo.png">
+    </div>
+</details>
  
 <span id="backlogs">
  
