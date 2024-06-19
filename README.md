@@ -39,6 +39,7 @@ Cada sprint no desenvolvimento ágil resulta em uma entrega funcional e incremen
   <img src="https://github.com/VitorRuan/Sprints/blob/main/Imagens/User%20Stories.png" alt="User Stories">
 </div>
 
+
  
 <span id="prototipo">
  
@@ -53,8 +54,30 @@ Essa API RESTful utiliza os métodos HTTP POST, GET, PUT e DELETE, completando o
 >    - **Frontend:** [acessar Frontend](https://github.com/erick-sts/Frontend-API)
 >    - **Backend:** [acessar Backend](https://github.com/leonfagundes27/Backend-API)
 >    - **API - Publicada:** https://frontend-api-git-main-ericksts-projects.vercel.app/tela-inicio
+>    
  
 → [Voltar ao topo](#topo)
+
+### :clapper: Funcionalidades do Sistema
+Confira a seguir uma demonstração das funcionalidades do sistema:
+<details>
+   <summary>Cadastro Professor</summary>
+    <div align="center">
+        <img src="https://github.com/VitorRuan/Sprints/blob/main/Imagens/Cadastro%20Professor.gif">
+    </div>
+</details>
+<details>
+   <summary>Relatório Cursos</summary>
+    <div align="center">
+        <img src="https://github.com/VitorRuan/Sprints/blob/main/Imagens/Relat%C3%B3rio%20Curso.gif">
+    </div>
+</details>
+<details>
+   <summary>Relatório Professores</summary>
+    <div align="center">
+        <img src="https://github.com/VitorRuan/Sprints/blob/main/Imagens/Relat%C3%B3rio%20Professor.gif">
+    </div>
+</details>
  
 <span id="arquitetura">
  
